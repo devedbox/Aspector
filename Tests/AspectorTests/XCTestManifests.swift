@@ -1,9 +1,9 @@
 import XCTest
 
-#if !os(macOS)
+#if !os(macOS) && !os(iOS)
 public func allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(AspectTests.allTests),
+        testCase(AspectorTests.allTests),
     ]
 }
 #endif
