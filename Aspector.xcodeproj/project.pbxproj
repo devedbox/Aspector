@@ -24,6 +24,8 @@
 		DCF73DA3212FF11200C534CD /* Aspect.NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Aspect.NSObject.swift */; };
 		DCF73DA4212FF11200C534CD /* Aspect.UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Aspect.UIKit.swift */; };
 		DCF73DA5212FF11200C534CD /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Aspect.swift */; };
+		DCF73DCC2130079300C534CD /* Aspect.Hooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF73DCB2130079300C534CD /* Aspect.Hooks.swift */; };
+		DCF73DCD2130079300C534CD /* Aspect.Hooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF73DCB2130079300C534CD /* Aspect.Hooks.swift */; };
 		OBJ_24 /* Aspect.NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Aspect.NSObject.swift */; };
 		OBJ_25 /* Aspect.UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Aspect.UIKit.swift */; };
 		OBJ_26 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Aspect.swift */; };
@@ -67,6 +69,7 @@
 		"Aspector::AspectorTests::Product" /* AspectorTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AspectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF73D9C212FF0FE00C534CD /* libAspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAspector.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF73D9E212FF0FE00C534CD /* AspectorLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectorLib.swift; sourceTree = "<group>"; };
+		DCF73DCB2130079300C534CD /* Aspect.Hooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Hooks.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Aspect.UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.UIKit.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		OBJ_14 /* AspectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectorTests.swift; sourceTree = "<group>"; };
@@ -163,6 +166,7 @@
 				OBJ_9 /* Aspect.NSObject.swift */,
 				OBJ_10 /* Aspect.UIKit.swift */,
 				OBJ_11 /* Aspect.swift */,
+				DCF73DCB2130079300C534CD /* Aspect.Hooks.swift */,
 			);
 			name = Aspector;
 			path = Sources/Aspector;
@@ -279,6 +283,7 @@
 				DCF73DA3212FF11200C534CD /* Aspect.NSObject.swift in Sources */,
 				DCF73DA4212FF11200C534CD /* Aspect.UIKit.swift in Sources */,
 				DCF73DA5212FF11200C534CD /* Aspect.swift in Sources */,
+				DCF73DCD2130079300C534CD /* Aspect.Hooks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +294,7 @@
 				OBJ_24 /* Aspect.NSObject.swift in Sources */,
 				OBJ_25 /* Aspect.UIKit.swift in Sources */,
 				OBJ_26 /* Aspect.swift in Sources */,
+				DCF73DCC2130079300C534CD /* Aspect.Hooks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
