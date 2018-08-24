@@ -17,13 +17,20 @@ public enum AspectStrategy {
 
 // MARK: - Aspectable.
 
-public typealias Patcher = () -> Void
-public typealias Dispatcher<T> = () -> T
+public typealias Patcher<T> = () throws -> T?
+public typealias Dispatcher<I, T> = (I?) throws -> T
 
 public protocol Aspectable {
     associatedtype Object
     
     var strategy: AspectStrategy { get }
+    func dispatch<I, R>(_ dispatcher: Dispatcher<I, R>, patcher: Patcher<I>) rethrows -> R
+}
+
+extension Aspectable {
+    public func dispatch<I, R>(_ dispatcher: Dispatcher<I, R>, patcher: Patcher<I>) rethrows -> R {
+        return try Aspector._dispatch(self, patcher: patcher, dispatcher: dispatcher)
+    }
 }
 
 // MARK: - Aspect.
@@ -52,21 +59,31 @@ public struct MetaAspect<T>: Aspectable {
     }
 }
 
-public func aspect<T>(_ obj: T, strategy: AspectStrategy) -> Aspect<T> {
+public func aspect<T>(
+    _ obj: T,
+    strategy: AspectStrategy) -> Aspect<T>
+{
     return Aspect<T>(strategy, obj)
 }
 
-public func aspect<T>(_ obj: T.Type, strategy: AspectStrategy) -> MetaAspect<T> {
+public func aspect<T>(
+    _ obj: T.Type,
+    strategy: AspectStrategy) -> MetaAspect<T>
+{
     return MetaAspect<T>(strategy, obj)
 }
 
 // MARK: - Dispatch.
 
-internal func dispatch<A, Result>(_ aspect: A, patcher: Patcher, dispatcher: () -> Result) -> Result where A: Aspectable {
+internal func _dispatch<A, I, Result>(
+    _ aspect: A,
+    patcher: Patcher<I>,
+    dispatcher: Dispatcher<I, Result>) rethrows -> Result where A: Aspectable
+{
     switch aspect.strategy {
     case .before:
-        patcher(); return dispatcher()
+        let i = try patcher(); return try dispatcher(i)
     case .after:
-        let r = dispatcher(); patcher(); return r
+        let r = try dispatcher(nil); _ = try patcher(); return r
     }
 }

@@ -14,6 +14,9 @@ final class AspectorTests: XCTestCase {
         print(obj.aspect(.after).isMember(of: type(of: obj)) {
             print("isMember")
         })
+        obj.aspect(.after).isEqual(obj) {
+            
+        }
     }
 
     static var allTests = [

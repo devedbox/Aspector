@@ -14,9 +14,9 @@ import UIKit
 extension MetaAspect where T: UIViewController {
     @available(iOS 5.0, *)
     public func attemptRotationToDeviceOrientation(
-        patcher: Patcher)
+        patcher: Patcher<Void>) rethrows
     {
-        dispatch(self, patcher: patcher) {
+        try _dispatch(self, patcher: patcher) { _ in
             obj.attemptRotationToDeviceOrientation()
         }
     }
@@ -26,27 +26,28 @@ extension MetaAspect where T: UIViewController {
 
 extension Aspect where T: UIViewController {
     
-    public func loadView(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.loadView() }
+    public func loadView(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.loadView() }
     }
     
     @available(iOS 9.0, *)
-    public func loadViewIfNeeded(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.loadViewIfNeeded() }
+    public func loadViewIfNeeded(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.loadViewIfNeeded() }
     }
     
-    public func viewDidLoad(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.viewDidLoad() }
+    public func viewDidLoad(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.viewDidLoad() }
     }
     
     @available(iOS 5.0, *)
     public func performSegue(
         withIdentifier identifier: String,
         sender: Any?,
-        aspector: Patcher)
+        patcher: Patcher<(String, Any?)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.performSegue(withIdentifier: identifier, sender: sender)
+        try _dispatch(self, patcher: patcher) {
+            obj.performSegue(withIdentifier: $0?.0 ?? identifier,
+                             sender: $0?.1 ?? sender)
         }
     }
     
@@ -54,10 +55,11 @@ extension Aspect where T: UIViewController {
     public func shouldPerformSegue(
         withIdentifier identifier: String,
         sender: Any?,
-        aspector: Patcher) -> Bool
+        patcher: Patcher<(String, Any?)>) rethrows -> Bool
     {
-        return dispatch(self, patcher: aspector) {
-            obj.shouldPerformSegue(withIdentifier: identifier, sender: sender)
+        return try _dispatch(self, patcher: patcher) {
+            obj.shouldPerformSegue(withIdentifier: $0?.0 ?? identifier,
+                                   sender: $0?.1 ?? sender)
         }
     }
     
@@ -65,10 +67,11 @@ extension Aspect where T: UIViewController {
     public func prepare(
         for segue: UIStoryboardSegue,
         sender: Any?,
-        aspector: Patcher)
+        patcher: Patcher<(UIStoryboardSegue, Any?)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.prepare(for: segue, sender: sender)
+        try _dispatch(self, patcher: patcher) {
+            obj.prepare(for: $0?.0 ?? segue,
+                        sender: $0?.1 ?? sender)
         }
     }
     
@@ -77,30 +80,32 @@ extension Aspect where T: UIViewController {
         _ action: Selector,
         from fromViewController: UIViewController,
         withSender sender: Any,
-        aspector: Patcher) -> Bool
+        patcher: Patcher<(Selector, UIViewController, Any)>) rethrows -> Bool
     {
-        return dispatch(self, patcher: aspector) {
-            obj.canPerformUnwindSegueAction(action, from: fromViewController, withSender: sender)
+        return try _dispatch(self, patcher: patcher) {
+            obj.canPerformUnwindSegueAction($0?.0 ?? action,
+                                            from: $0?.1 ?? fromViewController,
+                                            withSender: $0?.2 ?? sender)
         }
     }
     
     @available(iOS 9.0, *)
     public func allowedChildrenForUnwinding(
         from source: UIStoryboardUnwindSegueSource,
-        aspector: Patcher) -> [UIViewController]
+        patcher: Patcher<UIStoryboardUnwindSegueSource>) rethrows -> [UIViewController]
     {
-        return dispatch(self, patcher: aspector) {
-            obj.allowedChildrenForUnwinding(from: source)
+        return try _dispatch(self, patcher: patcher) {
+            obj.allowedChildrenForUnwinding(from: $0 ?? source)
         }
     }
     
     @available(iOS 9.0, *)
     public func childContaining(
         _ source: UIStoryboardUnwindSegueSource,
-        aspector: Patcher) -> UIViewController?
+        patcher: Patcher<UIStoryboardUnwindSegueSource>) rethrows -> UIViewController?
     {
-        return dispatch(self, patcher: aspector) {
-            obj.childContaining(source)
+        return try _dispatch(self, patcher: patcher) {
+            obj.childContaining($0 ?? source)
         }
     }
     
@@ -109,10 +114,12 @@ extension Aspect where T: UIViewController {
         _ action: Selector,
         from fromViewController: UIViewController,
         withSender sender: Any?,
-        aspector: Patcher) -> UIViewController?
+        patcher: Patcher<(Selector, UIViewController, Any?)>) rethrows -> UIViewController?
     {
-        return dispatch(self, patcher: aspector) {
-            obj.forUnwindSegueAction(action, from: fromViewController, withSender: sender)
+        return try _dispatch(self, patcher: patcher) {
+            obj.forUnwindSegueAction($0?.0 ?? action,
+                                     from: $0?.1 ?? fromViewController,
+                                     withSender: $0?.2 ?? sender)
         }
     }
     
@@ -120,10 +127,11 @@ extension Aspect where T: UIViewController {
     public func unwind(
         for unwindSegue: UIStoryboardSegue,
         towards subsequentVC: UIViewController,
-        aspector: Patcher)
+        patcher: Patcher<(UIStoryboardSegue, UIViewController)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.unwind(for: unwindSegue, towards: subsequentVC)
+        try _dispatch(self, patcher: patcher) {
+            obj.unwind(for: $0?.0 ?? unwindSegue,
+                       towards: $0?.1 ?? subsequentVC)
         }
     }
     
@@ -132,66 +140,68 @@ extension Aspect where T: UIViewController {
         to toViewController: UIViewController,
         from fromViewController: UIViewController,
         identifier: String?,
-        aspector: Patcher) -> UIStoryboardSegue?
+        patcher: Patcher<(UIViewController, UIViewController, String?)>) rethrows -> UIStoryboardSegue?
     {
-        return dispatch(self, patcher: aspector) {
-            obj.segueForUnwinding(to: toViewController, from: fromViewController, identifier: identifier)
+        return try _dispatch(self, patcher: patcher) {
+            obj.segueForUnwinding(to: $0?.0 ?? toViewController,
+                                  from: $0?.1 ?? fromViewController,
+                                  identifier: $0?.2 ?? identifier)
         }
     }
     
     public func viewWillAppear(
         _ animated: Bool,
-        aspector: Patcher)
+        patcher: Patcher<Bool>) rethrows
     {
-        dispatch(self, patcher: aspector) { obj.viewWillAppear(animated) }
+        try _dispatch(self, patcher: patcher) { obj.viewWillAppear($0 ?? animated) }
     }
     
     public func viewDidAppear(
         _ animated: Bool,
-        aspector: Patcher)
+        patcher: Patcher<Bool>) rethrows
     {
-        dispatch(self, patcher: aspector) { obj.viewDidAppear(animated) }
+        try _dispatch(self, patcher: patcher) { obj.viewDidAppear($0 ?? animated) }
     }
     
     public func viewWillDisappear(
         _ animated: Bool,
-        aspector: Patcher)
+        patcher: Patcher<Bool>) rethrows
     {
-        dispatch(self, patcher: aspector) { obj.viewWillDisappear(animated) }
+        try _dispatch(self, patcher: patcher) { obj.viewWillDisappear($0 ?? animated) }
     }
     
     public func viewDidDisappear(
         _ animated: Bool,
-        aspector: Patcher)
+        patcher: Patcher<Bool>) rethrows
     {
-        dispatch(self, patcher: aspector) { obj.viewDidDisappear(animated) }
+        try _dispatch(self, patcher: patcher) { obj.viewDidDisappear($0 ?? animated) }
     }
     
     @available(iOS 5.0, *)
-    public func viewWillLayoutSubviews(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.viewWillLayoutSubviews() }
+    public func viewWillLayoutSubviews(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.viewWillLayoutSubviews() }
     }
     
     @available(iOS 5.0, *)
-    public func viewDidLayoutSubviews(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.viewDidLayoutSubviews() }
+    public func viewDidLayoutSubviews(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.viewDidLayoutSubviews() }
     }
-    public func didReceiveMemoryWarning(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.didReceiveMemoryWarning() }
-    }
-    
-    public func parent(aspector: Patcher) -> UIViewController? {
-        return dispatch(self, patcher: aspector) { obj.parent }
+    public func didReceiveMemoryWarning(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.didReceiveMemoryWarning() }
     }
     
-    @available(iOS 5.0, *)
-    public func presentedViewController(aspector: Patcher) -> UIViewController? {
-        return dispatch(self, patcher: aspector) { obj.presentedViewController }
+    public func parent(patcher: Patcher<Void>) rethrows -> UIViewController? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.parent }
     }
     
     @available(iOS 5.0, *)
-    public func presentingViewController(aspector: Patcher) -> UIViewController? {
-        return dispatch(self, patcher: aspector) { obj.presentingViewController }
+    public func presentedViewController(patcher: Patcher<Void>) rethrows -> UIViewController? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.presentedViewController }
+    }
+    
+    @available(iOS 5.0, *)
+    public func presentingViewController(patcher: Patcher<Void>) rethrows -> UIViewController? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.presentingViewController }
     }
     
     @available(iOS 5.0, *)
@@ -199,12 +209,12 @@ extension Aspect where T: UIViewController {
         _ viewControllerToPresent: UIViewController,
         animated flag: Bool,
         completion: (() -> Void)? = nil,
-        aspector: Patcher)
+        patcher: Patcher<(UIViewController, Bool, (() -> Void)?)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.present(viewControllerToPresent,
-                        animated: flag,
-                        completion: completion)
+        try _dispatch(self, patcher: patcher) {
+            obj.present($0?.0 ?? viewControllerToPresent,
+                        animated: $0?.1 ?? flag,
+                        completion: $0?.2 ?? completion)
         }
     }
     
@@ -212,28 +222,28 @@ extension Aspect where T: UIViewController {
     public func dismiss(
         animated flag: Bool,
         completion: (() -> Void)? = nil,
-        aspector: Patcher)
+        patcher: Patcher<(Bool, (() -> Void)?)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.dismiss(animated: flag,
-                        completion: completion)
+        try _dispatch(self, patcher: patcher) {
+            obj.dismiss(animated: $0?.0 ?? flag,
+                        completion: $0?.1 ?? completion)
         }
     }
     
     @available(iOS 7.0, *)
-    public func setNeedsStatusBarAppearanceUpdate(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.setNeedsStatusBarAppearanceUpdate() }
+    public func setNeedsStatusBarAppearanceUpdate(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.setNeedsStatusBarAppearanceUpdate() }
     }
     
     @available(iOS 8.0, *)
     public func targetViewController(
         forAction action: Selector,
         sender: Any?,
-        aspector: Patcher) -> UIViewController?
+        patcher: Patcher<(Selector, Any?)>) rethrows -> UIViewController?
     {
-        return dispatch(self, patcher: aspector) {
-            obj.targetViewController(forAction: action,
-                                     sender: sender)
+        return try _dispatch(self, patcher: patcher) {
+            obj.targetViewController(forAction: $0?.0 ?? action,
+                                     sender: $0?.1 ?? sender)
         }
     }
     
@@ -241,49 +251,55 @@ extension Aspect where T: UIViewController {
     public func show(
         _ vc: UIViewController,
         sender: Any?,
-        aspector: Patcher)
+        patcher: Patcher<(UIViewController, Any?)>) rethrows
     {
-        dispatch(self, patcher: aspector) { obj.show(vc, sender: sender) }
+        try _dispatch(self, patcher: patcher) {
+            obj.show($0?.0 ?? vc,
+                     sender: $0?.1 ?? sender)
+        }
     }
     
     @available(iOS 8.0, *)
     public func showDetailViewController(
         _ vc: UIViewController,
         sender: Any?,
-        aspector: Patcher)
+        patcher: Patcher<(UIViewController, Any?)>) rethrows
     {
-        dispatch(self, patcher: aspector) { obj.showDetailViewController(vc, sender: sender) }
+        try _dispatch(self, patcher: patcher) {
+            obj.showDetailViewController($0?.0 ?? vc,
+                                         sender: $0?.1 ?? sender)
+        }
     }
     
     @available(iOS, introduced: 2.0, deprecated: 8.0, message: "Header views are animated along with the rest of the view hierarchy")
-    public func rotatingHeaderView(aspector: Patcher) -> UIView? {
-        return dispatch(self, patcher: aspector) { obj.rotatingHeaderView() }
+    public func rotatingHeaderView(patcher: Patcher<Void>) rethrows -> UIView? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.rotatingHeaderView() }
     }
     
     @available(iOS, introduced: 2.0, deprecated: 8.0, message: "Footer views are animated along with the rest of the view hierarchy")
-    public func rotatingFooterView(aspector: Patcher) -> UIView? {
-        return dispatch(self, patcher: aspector) { obj.rotatingFooterView() }
+    public func rotatingFooterView(patcher: Patcher<Void>) rethrows -> UIView? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.rotatingFooterView() }
     }
     
     @available(iOS, introduced: 2.0, deprecated: 8.0, message: "Implement viewWillTransitionToSize:withTransitionCoordinator: instead")
     public func willRotate(
         to toInterfaceOrientation: UIInterfaceOrientation,
         duration: TimeInterval,
-        aspector: Patcher)
+        patcher: Patcher<(UIInterfaceOrientation, TimeInterval)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.willRotate(to: toInterfaceOrientation,
-                           duration: duration)
+        try _dispatch(self, patcher: patcher) {
+            obj.willRotate(to: $0?.0 ?? toInterfaceOrientation,
+                           duration: $0?.1 ?? duration)
         }
     }
     
     @available(iOS, introduced: 2.0, deprecated: 8.0)
     public func didRotate(
         from fromInterfaceOrientation: UIInterfaceOrientation,
-        aspector: Patcher)
+        patcher: Patcher<UIInterfaceOrientation>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.didRotate(from: fromInterfaceOrientation)
+        try _dispatch(self, patcher: patcher) {
+            obj.didRotate(from: $0 ?? fromInterfaceOrientation)
         }
     }
     
@@ -291,38 +307,38 @@ extension Aspect where T: UIViewController {
     public func willAnimateRotation(
         to toInterfaceOrientation: UIInterfaceOrientation,
         duration: TimeInterval,
-        aspector: Patcher)
+        patcher: Patcher<(UIInterfaceOrientation, TimeInterval)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.willAnimateRotation(to: toInterfaceOrientation,
-                                    duration: duration)
+        try _dispatch(self, patcher: patcher) {
+            obj.willAnimateRotation(to: $0?.0 ?? toInterfaceOrientation,
+                                    duration: $0?.1 ?? duration)
         }
     }
     
     public func setEditing(
         _ editing: Bool,
         animated: Bool,
-        aspector: Patcher)
+        patcher: Patcher<(Bool, Bool)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.setEditing(editing,
-                           animated: animated)
+        try _dispatch(self, patcher: patcher) {
+            obj.setEditing($0?.0 ?? editing,
+                           animated: $0?.1 ?? animated)
         }
     }
     
     @available(iOS 5.0, *)
     public func addChild(
         _ childController: UIViewController,
-        aspector: Patcher)
+        patcher: Patcher<UIViewController>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.addChild(childController)
+        try _dispatch(self, patcher: patcher) {
+            obj.addChild($0 ?? childController)
         }
     }
     
     @available(iOS 5.0, *)
-    public func removeFromParent(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.removeFromParent() }
+    public func removeFromParent(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.removeFromParent() }
     }
     
     @available(iOS 5.0, *)
@@ -333,15 +349,15 @@ extension Aspect where T: UIViewController {
         options: UIView.AnimationOptions = [],
         animations: (() -> Void)?,
         completion: ((Bool) -> Void)? = nil,
-        aspector: Patcher)
+        patcher: Patcher<(UIViewController, UIViewController, TimeInterval, UIView.AnimationOptions, (() -> Void)?, ((Bool) -> Void)?)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.transition(from: fromViewController,
-                           to: toViewController,
-                           duration: duration,
-                           options: options,
-                           animations: animations,
-                           completion: completion)
+        try _dispatch(self, patcher: patcher) {
+            obj.transition(from: $0?.0 ?? fromViewController,
+                           to: $0?.1 ?? toViewController,
+                           duration: $0?.2 ?? duration,
+                           options: $0?.3 ?? options,
+                           animations: $0?.4 ?? animations,
+                           completion: $0?.5 ?? completion)
         }
     }
     
@@ -349,44 +365,44 @@ extension Aspect where T: UIViewController {
     public func beginAppearanceTransition(
         _ isAppearing: Bool,
         animated: Bool,
-        aspector: Patcher)
+        patcher: Patcher<(Bool, Bool)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.beginAppearanceTransition(isAppearing,
-                                          animated: animated)
+        try _dispatch(self, patcher: patcher) {
+            obj.beginAppearanceTransition($0?.0 ?? isAppearing,
+                                          animated: $0?.1 ?? animated)
         }
     }
     
     @available(iOS 5.0, *)
-    public func endAppearanceTransition(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.endAppearanceTransition() }
+    public func endAppearanceTransition(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.endAppearanceTransition() }
     }
     
     @available(iOS 8.0, *)
     public func setOverrideTraitCollection(
         _ collection: UITraitCollection?,
         forChild childViewController: UIViewController,
-        aspector: Patcher)
+        patcher: Patcher<(UITraitCollection?, UIViewController)>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.setOverrideTraitCollection(collection,
-                                           forChild: childViewController)
+        try _dispatch(self, patcher: patcher) {
+            obj.setOverrideTraitCollection($0?.0 ?? collection,
+                                           forChild: $0?.1 ?? childViewController)
         }
     }
     
     @available(iOS 8.0, *)
     public func overrideTraitCollection(
         forChild childViewController: UIViewController,
-        aspector: Patcher) -> UITraitCollection?
+        patcher: Patcher<UIViewController>) rethrows -> UITraitCollection?
     {
-        return dispatch(self, patcher: aspector) {
-            obj.overrideTraitCollection(forChild: childViewController)
+        return try _dispatch(self, patcher: patcher) {
+            obj.overrideTraitCollection(forChild: $0 ?? childViewController)
         }
     }
     
     @available(iOS, introduced: 6.0, deprecated: 8.0, message: "Manually forward viewWillTransitionToSize:withTransitionCoordinator: if necessary")
-    public func shouldAutomaticallyForwardRotationMethods(aspector: Patcher) -> Bool {
-        return dispatch(self, patcher: aspector) {
+    public func shouldAutomaticallyForwardRotationMethods(patcher: Patcher<Void>) rethrows -> Bool {
+        return try _dispatch(self, patcher: patcher) { _ in
             obj.shouldAutomaticallyForwardRotationMethods()
         }
     }
@@ -394,80 +410,80 @@ extension Aspect where T: UIViewController {
     @available(iOS 5.0, *)
     public func willMove(
         toParent parent: UIViewController?,
-        aspector: Patcher)
+        patcher: Patcher<UIViewController?>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.willMove(toParent: parent)
+        try _dispatch(self, patcher: patcher) {
+            obj.willMove(toParent: $0 ?? parent)
         }
     }
     
     @available(iOS 5.0, *)
     public func didMove(
         toParent parent: UIViewController?,
-        aspector: Patcher)
+        patcher: Patcher<UIViewController?>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.didMove(toParent: parent)
+        try _dispatch(self, patcher: patcher) {
+            obj.didMove(toParent: $0 ?? parent)
         }
     }
     
     @available(iOS 6.0, *)
     public func encodeRestorableState(
         with coder: NSCoder,
-        aspector: Patcher)
+        patcher: Patcher<NSCoder>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.encodeRestorableState(with: coder)
+        try _dispatch(self, patcher: patcher) {
+            obj.encodeRestorableState(with: $0 ?? coder)
         }
     }
     
     @available(iOS 6.0, *)
     public func decodeRestorableState(
         with coder: NSCoder,
-        aspector: Patcher)
+        patcher: Patcher<NSCoder>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.decodeRestorableState(with: coder)
+        try _dispatch(self, patcher: patcher) {
+            obj.decodeRestorableState(with: $0 ?? coder)
         }
     }
     
     @available(iOS 7.0, *)
-    public func applicationFinishedRestoringState(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.applicationFinishedRestoringState() }
+    public func applicationFinishedRestoringState(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.applicationFinishedRestoringState() }
     }
     
     @available(iOS 6.0, *)
-    public func updateViewConstraints(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.updateViewConstraints() }
+    public func updateViewConstraints(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.updateViewConstraints() }
     }
     
     @available(iOS 11.0, *)
-    public func viewLayoutMarginsDidChange(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.viewLayoutMarginsDidChange() }
+    public func viewLayoutMarginsDidChange(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.viewLayoutMarginsDidChange() }
     }
     
     @available(iOS 11.0, *)
-    public func viewSafeAreaInsetsDidChange(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.viewSafeAreaInsetsDidChange() }
+    public func viewSafeAreaInsetsDidChange(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.viewSafeAreaInsetsDidChange() }
     }
     
     @available(iOS 9.0, *)
     public func addKeyCommand(
         _ keyCommand: UIKeyCommand,
-        aspector: Patcher)
+        patcher: Patcher<UIKeyCommand>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.addKeyCommand(keyCommand)
+        try _dispatch(self, patcher: patcher) {
+            obj.addKeyCommand($0 ?? keyCommand)
         }
     }
     
     @available(iOS 9.0, *)
     public func removeKeyCommand(
         _ keyCommand: UIKeyCommand,
-        aspector: Patcher)
+        patcher: Patcher<UIKeyCommand>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.removeKeyCommand(keyCommand)
+        try _dispatch(self, patcher: patcher) {
+            obj.removeKeyCommand($0 ?? keyCommand)
         }
     }
     
@@ -475,32 +491,32 @@ extension Aspect where T: UIViewController {
     public func registerForPreviewing(
         with delegate: UIViewControllerPreviewingDelegate,
         sourceView: UIView,
-        aspector: Patcher) -> UIViewControllerPreviewing
+        patcher: Patcher<(UIViewControllerPreviewingDelegate, UIView)>) rethrows -> UIViewControllerPreviewing
     {
-        return dispatch(self, patcher: aspector) {
-            obj.registerForPreviewing(with: delegate,
-                                      sourceView: sourceView)
+        return try _dispatch(self, patcher: patcher) {
+            obj.registerForPreviewing(with: $0?.0 ?? delegate,
+                                      sourceView: $0?.1 ?? sourceView)
         }
     }
     
     @available(iOS 9.0, *)
     public func unregisterForPreviewing(
         withContext previewing: UIViewControllerPreviewing,
-        aspector: Patcher)
+        patcher: Patcher<UIViewControllerPreviewing>) rethrows
     {
-        dispatch(self, patcher: aspector) {
-            obj.unregisterForPreviewing(withContext: previewing)
+        try _dispatch(self, patcher: patcher) {
+            obj.unregisterForPreviewing(withContext: $0 ?? previewing)
         }
     }
     
     @available(iOS 11.0, *)
-    public func setNeedsUpdateOfScreenEdgesDeferringSystemGestures(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.setNeedsUpdateOfScreenEdgesDeferringSystemGestures() }
+    public func setNeedsUpdateOfScreenEdgesDeferringSystemGestures(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.setNeedsUpdateOfScreenEdgesDeferringSystemGestures() }
     }
     
     @available(iOS 11.0, *)
-    public func setNeedsUpdateOfHomeIndicatorAutoHidden(aspector: Patcher) {
-        dispatch(self, patcher: aspector) { obj.setNeedsUpdateOfHomeIndicatorAutoHidden() }
+    public func setNeedsUpdateOfHomeIndicatorAutoHidden(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in obj.setNeedsUpdateOfHomeIndicatorAutoHidden() }
     }
 }
 

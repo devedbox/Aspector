@@ -22,36 +22,36 @@ extension NSObject {
 // MARK: - NSObjectProtocol.
 
 extension Aspect where T: NSObjectProtocol {
-    public func isEqual(_ object: Any?, patcher: Patcher) -> Bool {
-        return dispatch(self, patcher: patcher) { obj.isEqual(object) }
+    public func isEqual(_ object: Any?, patcher: Patcher<Any?>) rethrows -> Bool {
+        return try _dispatch(self, patcher: patcher) { obj.isEqual( $0 ?? object) }
     }
     
-    public func hash(patcher: Patcher) -> Int {
-        return dispatch(self, patcher: patcher) { obj.hash }
+    public func hash(patcher: Patcher<Void>) rethrows -> Int {
+        return  try _dispatch(self, patcher: patcher) { _ in obj.hash }
     }
     
-    public func superclass(patcher: Patcher) -> AnyClass? {
-        return dispatch(self, patcher: patcher) { obj.superclass }
+    public func superclass(patcher: Patcher<Void>) rethrows -> AnyClass? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.superclass }
     }
     
-    public func `self`(patcher: Patcher) -> T {
-        return dispatch(self, patcher: patcher) { obj }
+    public func `self`(patcher: Patcher<Void>) rethrows -> T {
+        return try _dispatch(self, patcher: patcher) { _ in obj }
     }
     
     public func perform(
         _ aSelector: Selector?,
-        patcher: Patcher) -> Unmanaged<AnyObject>?
+        patcher: Patcher<Selector?>) rethrows -> Unmanaged<AnyObject>?
     {
-        return dispatch(self, patcher: patcher) { obj.perform(aSelector) }
+        return try _dispatch(self, patcher: patcher) { obj.perform($0 ?? aSelector) }
     }
     
     public func perform(
         _ aSelector: Selector?,
         with object: Any?,
-        patcher: Patcher) -> Unmanaged<AnyObject>?
+        patcher: Patcher<(Selector?, Any?)>) rethrows -> Unmanaged<AnyObject>?
     {
-        return dispatch(self, patcher: patcher) {
-            obj.perform(aSelector, with: object)
+        return try _dispatch(self, patcher: patcher) {
+            obj.perform($0?.0 ?? aSelector, with: $0?.1 ?? object)
         }
     }
     
@@ -59,157 +59,157 @@ extension Aspect where T: NSObjectProtocol {
         _ aSelector: Selector?,
         with object1: Any?,
         with object2: Any?,
-        patcher: Patcher) -> Unmanaged<AnyObject>?
+        patcher: Patcher<(Selector?, Any?, Any?)>) rethrows -> Unmanaged<AnyObject>?
     {
-        return dispatch(self, patcher: patcher) {
-            obj.perform(aSelector,
-                        with: object1,
-                        with: object2)
+        return try _dispatch(self, patcher: patcher) {
+            obj.perform($0?.0 ?? aSelector,
+                        with: $0?.1 ?? object1,
+                        with: $0?.2 ?? object2)
         }
     }
     
-    public func isProxy(patcher: Patcher) -> Bool {
-        return dispatch(self, patcher: patcher) { obj.isProxy() }
+    public func isProxy(patcher: Patcher<Void>) rethrows -> Bool {
+        return try _dispatch(self, patcher: patcher) { _ in obj.isProxy() }
     }
     
     public func isKind(
         of aClass: AnyClass,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<AnyClass>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.isKind(of: aClass)
+        return try _dispatch(self, patcher: patcher) {
+            obj.isKind(of: $0 ?? aClass)
         }
     }
     
     public func isMember(
         of aClass: AnyClass,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<AnyClass>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.isMember(of: aClass)
+        return try _dispatch(self, patcher: patcher) {
+            obj.isMember(of: $0 ?? aClass)
         }
     }
     
     public func conforms(
         to aProtocol: Protocol,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<Protocol>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.conforms(to: aProtocol)
+        return try _dispatch(self, patcher: patcher) {
+            obj.conforms(to: $0 ?? aProtocol)
         }
     }
     
     public func responds(
         to aSelector: Selector?,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<Selector?>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.responds(to: aSelector)
+        return try _dispatch(self, patcher: patcher) {
+            obj.responds(to: $0 ?? aSelector)
         }
     }
     
-    public func description(patcher: Patcher) -> String {
-        return dispatch(self, patcher: patcher) { obj.description }
+    public func description(patcher: Patcher<Void>) rethrows -> String {
+        return try _dispatch(self, patcher: patcher) { _ in obj.description }
     }
     
-    public func debugDescription(patcher: Patcher) -> String? {
-        return dispatch(self, patcher: patcher) { obj.debugDescription }
+    public func debugDescription(patcher: Patcher<Void>) rethrows -> String? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.debugDescription }
     }
 }
 
 // MARK: - NSObject.Type.
 
 extension MetaAspect where T: NSObject {
-    public func load(patcher: Patcher) {
-        dispatch(self, patcher: patcher) {
+    public func load(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in
             obj.load()
         }
     }
     
-    public func initialize(patcher: Patcher) {
-        dispatch(self, patcher: patcher) {
+    public func initialize(patcher: Patcher<Void>) rethrows {
+        try _dispatch(self, patcher: patcher) { _ in
             obj.initialize()
         }
     }
     
     public func instancesRespond(
-        to aSelector: Selector!,
-        patcher: Patcher) -> Bool
+        to aSelector: Selector?,
+        patcher: Patcher<Selector?>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.instancesRespond(to: aSelector)
+        return try _dispatch(self, patcher: patcher) {
+            obj.instancesRespond(to: $0 ?? aSelector)
         }
     }
     
     public func conforms(
         to protocol: Protocol,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<Protocol>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.conforms(to: `protocol`)
+        return try _dispatch(self, patcher: patcher) {
+            obj.conforms(to: $0 ?? `protocol`)
         }
     }
     
     public func instanceMethod(
         for aSelector: Selector?,
-        patcher: Patcher) -> IMP?
+        patcher: Patcher<Selector?>) rethrows -> IMP?
     {
-        return dispatch(self, patcher: patcher) {
-            obj.instanceMethod(for: aSelector)
+        return try _dispatch(self, patcher: patcher) {
+            obj.instanceMethod(for: $0 ?? aSelector)
         }
     }
     
     public func isSubclass(
         of aClass: AnyClass,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<AnyClass>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.isSubclass(of: aClass)
+        return try _dispatch(self, patcher: patcher) {
+            obj.isSubclass(of: $0 ?? aClass)
         }
     }
     
     @available(iOS 2.0, *)
     public func resolveClassMethod(
         _ sel: Selector?,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<Selector?>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.resolveClassMethod(sel)
+        return try _dispatch(self, patcher: patcher) {
+            obj.resolveClassMethod($0 ?? sel)
         }
     }
     
     @available(iOS 2.0, *)
     public func resolveInstanceMethod(
         _ sel: Selector?,
-        patcher: Patcher) -> Bool
+        patcher: Patcher<Selector?>) rethrows -> Bool
     {
-        return dispatch(self, patcher: patcher) {
-            obj.resolveInstanceMethod(sel)
+        return try _dispatch(self, patcher: patcher) {
+            obj.resolveInstanceMethod($0 ?? sel)
         }
     }
     
-    public func hash(patcher: Patcher) -> Int {
-        return dispatch(self, patcher: patcher) { obj.hash() }
+    public func hash(patcher: Patcher<Void>) rethrows -> Int {
+        return try _dispatch(self, patcher: patcher) { _ in obj.hash() }
     }
     
-    public func superclass(patcher: Patcher) -> AnyClass? {
-        return dispatch(self, patcher: patcher) { obj.superclass() }
+    public func superclass(patcher: Patcher<Void>) rethrows -> AnyClass? {
+        return try _dispatch(self, patcher: patcher) { _ in obj.superclass() }
     }
     
-    public func description(patcher: Patcher) -> String {
-        return dispatch(self, patcher: patcher) { obj.description() }
+    public func description(patcher: Patcher<Void>) rethrows -> String {
+        return try _dispatch(self, patcher: patcher) { _ in obj.description() }
     }
     
-    public func debugDescription(patcher: Patcher) -> String {
-        return dispatch(self, patcher: patcher) { obj.debugDescription() }
+    public func debugDescription(patcher: Patcher<Void>) rethrows -> String {
+        return try _dispatch(self, patcher: patcher) { _ in obj.debugDescription() }
     }
     
     public func cancelPreviousPerformRequests(
         withTarget aTarget: Any,
-        patcher: Patcher)
+        patcher: Patcher<Any>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.cancelPreviousPerformRequests(withTarget: aTarget)
+        try _dispatch(self, patcher: patcher) {
+            obj.cancelPreviousPerformRequests(withTarget: $0 ?? aTarget)
         }
     }
     
@@ -217,12 +217,12 @@ extension MetaAspect where T: NSObject {
         withTarget aTarget: Any,
         selector aSelector: Selector,
         object anArgument: Any?,
-        patcher: Patcher)
+        patcher: Patcher<(Any, Selector, Any?)>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.cancelPreviousPerformRequests(withTarget: aTarget,
-                                              selector: aSelector,
-                                              object: anArgument)
+        try _dispatch(self, patcher: patcher) {
+            obj.cancelPreviousPerformRequests(withTarget: $0?.0 ?? aTarget,
+                                              selector: $0?.1 ?? aSelector,
+                                              object: $0?.2 ?? anArgument)
         }
     }
 }
@@ -231,38 +231,40 @@ extension MetaAspect where T: NSObject {
 
 extension Aspect where T: NSObject {
     
-    public func copy(patcher: Patcher) -> Any {
-        return dispatch(self, patcher: patcher) {
+    public func copy(patcher: Patcher<Void>) rethrows -> Any {
+        return try _dispatch(self, patcher: patcher) { _ in
             obj.copy()
         }
     }
     
-    public func mutableCopy(patcher: Patcher) -> Any {
-        return dispatch(self, patcher: patcher) {
+    public func mutableCopy(patcher: Patcher<Void>) rethrows -> Any {
+        return try _dispatch(self, patcher: patcher) { _ in
             obj.mutableCopy()
         }
     }
     
     public func method(
         for aSelector: Selector?,
-        patcher: Patcher) -> IMP?
+        patcher: Patcher<Selector?>) rethrows -> IMP?
     {
-        return dispatch(self, patcher: patcher) {
-            obj.method(for: aSelector)
+        return try _dispatch(self, patcher: patcher) {
+            obj.method(for: $0 ?? aSelector)
         }
     }
     
     public func doesNotRecognizeSelector(
         _ aSelector: Selector?,
-        patcher: Patcher)
+        patcher: Patcher<Selector?>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.doesNotRecognizeSelector(aSelector)
+        try _dispatch(self, patcher: patcher) {
+            obj.doesNotRecognizeSelector($0 ?? aSelector)
         }
     }
     
-    public func autoContentAccessingProxy(patcher: Patcher) -> Any {
-        return dispatch(self, patcher: patcher) {
+    public func autoContentAccessingProxy(
+        patcher: Patcher<Void>) rethrows -> Any
+    {
+        return try _dispatch(self, patcher: patcher) { _ in
             obj.autoContentAccessingProxy
         }
     }
@@ -270,10 +272,10 @@ extension Aspect where T: NSObject {
     @available(iOS 2.0, *)
     public func forwardingTarget(
         for aSelector: Selector?,
-        patcher: Patcher) -> Any?
+        patcher: Patcher<Selector?>) rethrows -> Any?
     {
-        return dispatch(self, patcher: patcher) {
-            obj.forwardingTarget(for: aSelector)
+        return try _dispatch(self, patcher: patcher) {
+            obj.forwardingTarget(for: $0 ?? aSelector)
         }
     }
     
@@ -281,12 +283,12 @@ extension Aspect where T: NSObject {
         _ aSelector: Selector,
         with anArgument: Any?,
         afterDelay delay: TimeInterval,
-        patcher: Patcher)
+        patcher: Patcher<(Selector, Any?, TimeInterval)>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.perform(aSelector,
-                        with: anArgument,
-                        afterDelay: delay)
+        try _dispatch(self, patcher: patcher) {
+            obj.perform($0?.0 ?? aSelector,
+                        with: $0?.1 ?? anArgument,
+                        afterDelay: $0?.2 ?? delay)
         }
     }
     
@@ -295,13 +297,13 @@ extension Aspect where T: NSObject {
         with anArgument: Any?,
         afterDelay delay: TimeInterval,
         inModes modes: [RunLoop.Mode],
-        patcher: Patcher)
+        patcher: Patcher<(Selector, Any?, TimeInterval, [RunLoop.Mode])>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.perform(aSelector,
-                        with: anArgument,
-                        afterDelay: delay,
-                        inModes: modes)
+        try _dispatch(self, patcher: patcher) {
+            obj.perform($0?.0 ?? aSelector,
+                        with: $0?.1 ?? anArgument,
+                        afterDelay: $0?.2 ?? delay,
+                        inModes: $0?.3 ?? modes)
         }
     }
     
@@ -310,13 +312,13 @@ extension Aspect where T: NSObject {
         on thr: Thread,
         with arg: Any?,
         waitUntilDone wait: Bool,
-        patcher: Patcher)
+        patcher: Patcher<(Selector, Thread, Any?, Bool)>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.perform(aSelector,
-                        on: thr,
-                        with: arg,
-                        waitUntilDone: wait)
+        try _dispatch(self, patcher: patcher) {
+            obj.perform($0?.0 ?? aSelector,
+                        on: $0?.1 ?? thr,
+                        with: $0?.2 ?? arg,
+                        waitUntilDone: $0?.3 ?? wait)
         }
     }
     
@@ -326,14 +328,14 @@ extension Aspect where T: NSObject {
         with arg: Any?,
         waitUntilDone wait: Bool,
         modes array: [String]?,
-        patcher: Patcher)
+        patcher: Patcher<(Selector, Thread, Any?, Bool, [String]?)>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.perform(aSelector,
-                        on: thr,
-                        with: arg,
-                        waitUntilDone: wait,
-                        modes: array)
+        try _dispatch(self, patcher: patcher) {
+            obj.perform($0?.0 ?? aSelector,
+                        on: $0?.1 ?? thr,
+                        with: $0?.2 ?? arg,
+                        waitUntilDone: $0?.3 ?? wait,
+                        modes: $0?.4 ?? array)
         }
     }
     
@@ -341,12 +343,12 @@ extension Aspect where T: NSObject {
         onMainThread aSelector: Selector,
         with arg: Any?,
         waitUntilDone wait: Bool,
-        patcher: Patcher)
+        patcher: Patcher<(Selector, Any?, Bool)>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.performSelector(onMainThread: aSelector,
-                                with: arg,
-                                waitUntilDone: wait)
+        try _dispatch(self, patcher: patcher) {
+            obj.performSelector(onMainThread: $0?.0 ?? aSelector,
+                                with: $0?.1 ?? arg,
+                                waitUntilDone: $0?.2 ?? wait)
         }
     }
     
@@ -355,24 +357,24 @@ extension Aspect where T: NSObject {
         with arg: Any?,
         waitUntilDone wait: Bool,
         modes array: [String]?,
-        patcher: Patcher)
+        patcher: Patcher<(Selector, Any?, Bool, [String]?)>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.performSelector(onMainThread: aSelector,
-                                with: arg,
-                                waitUntilDone: wait,
-                                modes: array)
+        try _dispatch(self, patcher: patcher) {
+            obj.performSelector(onMainThread: $0?.0 ?? aSelector,
+                                with: $0?.1 ?? arg,
+                                waitUntilDone: $0?.2 ?? wait,
+                                modes: $0?.3 ?? array)
         }
     }
     
     public func performSelector(
         inBackground aSelector: Selector,
         with arg: Any?,
-        patcher: Patcher)
+        patcher: Patcher<(Selector, Any?)>) rethrows
     {
-        dispatch(self, patcher: patcher) {
-            obj.performSelector(inBackground: aSelector,
-                                with: arg)
+        try _dispatch(self, patcher: patcher) {
+            obj.performSelector(inBackground: $0?.0 ?? aSelector,
+                                with: $0?.1 ?? arg)
         }
     }
 }
