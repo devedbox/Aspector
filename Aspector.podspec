@@ -10,8 +10,8 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
   s.author             = { "devedbox" => "devedbox@qq.com" }
-  s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  # s.platform     = :ios
+  s.platform     = :ios, "8.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -34,6 +34,8 @@ Pod::Spec.new do |s|
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   s.requires_arc = true
+  s.swift_version = '4.2'
+  s.static_framework = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
