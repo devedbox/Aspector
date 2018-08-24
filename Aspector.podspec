@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Aspector"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "The kit to code aspectly."
   s.description  = <<-DESC
                     The kit to code aspectly. iOS and macOS available.
