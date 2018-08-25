@@ -22,7 +22,10 @@ private let _SubClassPrefix = "_Aspector_SubClass_"
 private let _AspectorLiteral = "_aspector_"
 private let _AspectorForwardInvocation = "_aspector_forwardInvocation:"
 
-public func hook(
+// MARK: - Hook.
+
+@discardableResult
+public func forward(
     _ obj: AnyObject,
     strategy: AspectStrategy,
     selector: Selector,
@@ -62,6 +65,8 @@ public func hook(
     return forward!
 }
 
+// MARK: - Forward.
+
 public struct Forward {
     internal static var Storage: [Forward] = []
     
@@ -84,6 +89,8 @@ public struct Forward {
     }
 }
 
+// MARK: -
+
 extension Forward {
     fileprivate static func _forward(for obj: AnyObject, selector: Selector) -> Forward? {
         return Storage.first(where: { $0.class.obj === obj && $0.message.selector == selector })
@@ -97,10 +104,14 @@ extension Forward {
     }
 }
 
+// MARK: - ObjCRuntimeForwardable.
+
 public protocol ObjCRuntimeForwardable {
     func forward() throws
     func invalid() throws
 }
+
+// MARK: - ClassForward.
 
 public struct ClassForward {
     public let obj: AnyObject
@@ -174,6 +185,8 @@ public struct ClassForward {
         }
     }
 }
+
+// MARK: - InvocationForward.
 
 public struct InvocationForward: ObjCRuntimeForwardable {
     public let `class`: AnyClass
@@ -283,6 +296,8 @@ public struct InvocationForward: ObjCRuntimeForwardable {
     }
 }
 
+// MARK: -
+
 extension InvocationForward {
     public mutating func add(_ patcher: @escaping Patcher<Void>, for strategy: AspectStrategy) {
         switch strategy {
@@ -293,6 +308,8 @@ extension InvocationForward {
         }
     }
 }
+
+// MARK: - IsaForward.
 
 public struct IsaForward: ObjCRuntimeForwardable {
     public let `class`: AnyClass
@@ -360,6 +377,8 @@ public struct IsaForward: ObjCRuntimeForwardable {
         )
     }
 }
+
+// MARK: - MessageForward.
 
 public struct MessageForward: ObjCRuntimeForwardable {
     public let `class`: AnyClass

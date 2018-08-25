@@ -7,6 +7,38 @@
 
 import Foundation
 
+// MARK: - Forward.
+
+extension NSObjectProtocol {
+    @discardableResult
+    public func forward(
+        _ strategy: AspectStrategy,
+        selector: Selector,
+        patcher: @escaping Patcher<Void>) throws -> Forward
+    {
+        return try Aspector.forward(
+            self,
+            strategy: strategy,
+            selector: selector,
+            patcher: patcher
+        )
+    }
+    
+    @discardableResult
+    public static func forward(
+        _ strategy: AspectStrategy,
+        selector: Selector,
+        patcher: @escaping Patcher<Void>) throws -> Forward
+    {
+        return try Aspector.forward(
+            self,
+            strategy: strategy,
+            selector: selector,
+            patcher: patcher
+        )
+    }
+}
+
 // MARK: - Aspector.
 
 extension NSObject {
