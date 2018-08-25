@@ -1,0 +1,4 @@
+module ObjC {
+    umbrella header "/Users/devedbox/Documents/Github/Aspector/Sources/ObjC/include/ObjC.h"
+    export *
+}

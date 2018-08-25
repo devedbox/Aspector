@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DCF73D9B212FF0FE00C534CD"
-               BuildableName = "libAspectorLib.a"
+               BuildableName = "libAspector.a"
                BlueprintName = "AspectorLib"
                ReferencedContainer = "container:Aspector.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DCF73D9B212FF0FE00C534CD"
-            BuildableName = "libAspectorLib.a"
+            BuildableName = "libAspector.a"
             BlueprintName = "AspectorLib"
             ReferencedContainer = "container:Aspector.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DCF73D9B212FF0FE00C534CD"
-            BuildableName = "libAspectorLib.a"
+            BuildableName = "libAspector.a"
             BlueprintName = "AspectorLib"
             ReferencedContainer = "container:Aspector.xcodeproj">
          </BuildableReference>
