@@ -40,8 +40,8 @@ public struct ClassForward {
         
         guard let cls = obj.perform?(NSSelectorFromString("class"))?.takeRetainedValue() as? AnyClass
             , let obj_t = object_getClass(obj)
-            else {
-                throw HooksError.objectGetClassFailed(object: obj)
+        else {
+            throw HooksError.objectGetClassFailed(object: obj)
         }
         
         if
