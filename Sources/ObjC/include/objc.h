@@ -42,6 +42,11 @@ objc_responds_to(_Nonnull id obj, _Nonnull SEL selector);
 
 - (void)invoke;
 - (void)invokeWithTarget:(id)target;
+
+- (nullable id)argumentAtIndex:(NSUInteger )idx;
+- (nonnull NSArray *)arguments;
+
+- (nullable id)returnValue;
 @end
 NS_ASSUME_NONNULL_END
 #endif /* objc_h */

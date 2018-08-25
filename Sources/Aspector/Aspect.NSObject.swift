@@ -14,7 +14,7 @@ extension NSObjectProtocol {
     public func forward(
         _ strategy: AspectStrategy,
         selector: Selector,
-        patcher: @escaping Patcher<Void>) throws -> Forward
+        patcher: @escaping ForwardPatcher) throws -> Forward
     {
         return try Aspector.forward(
             self,
@@ -28,7 +28,7 @@ extension NSObjectProtocol {
     public static func forward(
         _ strategy: AspectStrategy,
         selector: Selector,
-        patcher: @escaping Patcher<Void>) throws -> Forward
+        patcher: @escaping ForwardPatcher) throws -> Forward
     {
         return try Aspector.forward(
             self,

@@ -4,8 +4,9 @@ import UIKit
 
 extension UIViewController {
     @objc
-    func instanceFunc() {
+    func instanceFunc(_ arg: Int) -> Int {
         print(#function)
+        return arg
     }
     
     @objc
@@ -35,22 +36,28 @@ final class AspectorTests: XCTestCase {
     
     func testHooks() {
         let obj = UIViewController()
-        let cls = try? obj.forward(.before, selector: NSSelectorFromString("instanceFunc")) {
-            print("This is a before patcher........")
+        let cls = try? obj.forward(.before, selector: #selector(UIViewController.instanceFunc(_:))) {
+            print("This is a before patcher........, arguments: \($0)")
         }
-        let metaCls = try? UIViewController.forward(.after, selector: NSSelectorFromString("classFunc")) {
-            print("This is a after patcher........of UIViewController.Type")
+        _ = try? obj.forward(.after, selector: #selector(UIViewController.instanceFunc(_:))) {
+            print("This is a after patcher........, return value: \($0)")
+        }
+        let metaCls = try? UIViewController.forward(.after, selector: #selector(UIViewController.classFunc)) {
+            print("This is a after patcher........of UIViewController.Type, returned value: \($0)")
             throw ForwardError.duplicateSubClass(class: UIViewController.self)
         }
+        _ = try? UIViewController.forward(.before, selector: #selector(UIViewController.classFunc)) {
+            print("This is a before patcher........of UIViewController.Type, args value: \($0)")
+        }
         
-        obj.instanceFunc()
+        _ = obj.instanceFunc(2)
         UIViewController.classFunc()
         print(obj.perform(NSSelectorFromString("class")))
         
         try? cls?.invalid()
         try? metaCls?.invalid()
         
-        obj.instanceFunc()
+        _ = obj.instanceFunc(1)
         UIViewController.classFunc()
         print(obj.perform(NSSelectorFromString("class")))
     }

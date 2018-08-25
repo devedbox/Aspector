@@ -17,7 +17,8 @@ public enum AspectStrategy {
 
 // MARK: - Aspectable.
 
-public typealias Patcher<T> = () throws -> T?
+public typealias InOutPatcher<I, O> = (I) throws -> O
+public typealias Patcher<T> = InOutPatcher<Void, T?>
 public typealias Dispatcher<I, T> = (I?) throws -> T
 
 public protocol Aspectable {
@@ -82,8 +83,8 @@ internal func _dispatch<A, I, Result>(
 {
     switch aspect.strategy {
     case .before:
-        let i = try patcher(); return try dispatcher(i)
+        let i = try patcher(()); return try dispatcher(i)
     case .after:
-        let r = try dispatcher(nil); _ = try patcher(); return r
+        let r = try dispatcher(nil); _ = try patcher(()); return r
     }
 }

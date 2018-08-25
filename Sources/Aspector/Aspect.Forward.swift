@@ -24,12 +24,14 @@ private let _AspectorForwardInvocation = "_aspector_forwardInvocation:"
 
 // MARK: - Hook.
 
+public typealias ForwardPatcher = InOutPatcher<Any, Void>
+
 @discardableResult
 public func forward(
     _ obj: AnyObject,
     strategy: AspectStrategy,
     selector: Selector,
-    patcher: @escaping Patcher<Void>) throws -> Forward
+    patcher: @escaping ForwardPatcher) throws -> Forward
 {
     var forward = Forward._forward(for: obj, selector: selector)
     
@@ -49,7 +51,7 @@ public func forward(
     }
     
     Forward._removeForward(
-        for: forward as AnyObject,
+        for: obj,
         selector: selector
     )
     
@@ -193,8 +195,8 @@ public struct InvocationForward: ObjCRuntimeForwardable {
     
     private let forward_invocation_sel = NSSelectorFromString("forwardInvocation:")
     
-    internal var befores: [Patcher<Void>] = []
-    internal var afters: [Patcher<Void>] = []
+    internal var befores: [ForwardPatcher] = []
+    internal var afters: [ForwardPatcher] = []
     
     public init(class: AnyClass) {
         self.class = `class`
@@ -221,7 +223,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         )
         
         do {
-            try invocationForward?.class.invocation?.befores.forEach { try $0() }
+            try invocationForward?.class.invocation?.befores.forEach { try $0(asp_invocation.arguments()) }
         } catch _ { return }
         
         if _aspector_responds_to(target, selector: asp_selector) {
@@ -229,7 +231,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
             asp_invocation.invoke()
             
             do {
-                try invocationForward?.class.invocation?.afters.forEach { try $0() }
+                try invocationForward?.class.invocation?.afters.forEach { try $0(asp_invocation.returnValue() as Any) }
             } catch _ { return }
         } else {
             let originalInvSel = NSSelectorFromString(_AspectorForwardInvocation)
@@ -299,7 +301,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
 // MARK: -
 
 extension InvocationForward {
-    public mutating func add(_ patcher: @escaping Patcher<Void>, for strategy: AspectStrategy) {
+    public mutating func add(_ patcher: @escaping ForwardPatcher, for strategy: AspectStrategy) {
         switch strategy {
         case .before:
             befores.append(patcher)
