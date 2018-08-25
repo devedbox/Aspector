@@ -149,7 +149,7 @@
       };
       "OBJ_15" = {
          isa = "PBXFileReference";
-         path = "Aspect.Hooks.swift";
+         path = "Aspect.Forward.swift";
          sourceTree = "<group>";
       };
       "OBJ_16" = {
