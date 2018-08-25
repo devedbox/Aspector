@@ -11,7 +11,7 @@ import ObjC
 
 // MARK: Error.
 
-public enum HooksError: Error {
+public enum ForwardError: Error {
     case getMethodFailed(obj: AnyObject, selector: Selector)
     case allocateClassPairFailed(class: AnyClass)
     case duplicateSubClass(class: AnyClass)
@@ -115,7 +115,7 @@ public struct ClassForward {
         guard let cls = obj.perform?(NSSelectorFromString("class"))?.takeRetainedValue() as? AnyClass
             , let obj_t = object_getClass(obj)
         else {
-            throw HooksError.objectGetClassFailed(object: obj)
+            throw ForwardError.objectGetClassFailed(object: obj)
         }
         
         if
@@ -137,7 +137,7 @@ public struct ClassForward {
         }
         
         guard let sub_cls = objc_allocateClassPair(obj_t, cls_name.withCString { $0 }, 0) else {
-            throw HooksError.allocateClassPairFailed(class: obj_t)
+            throw ForwardError.allocateClassPairFailed(class: obj_t)
         }
         
         invocation = InvocationForward(class: sub_cls)
@@ -160,7 +160,7 @@ public struct ClassForward {
         // try isas.forEach { try $0.invalid() }
         
         guard let obj_t = object_getClass(obj) else {
-            throw HooksError.objectGetClassFailed(object: obj)
+            throw ForwardError.objectGetClassFailed(object: obj)
         }
         
         if
@@ -237,7 +237,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         let invocation_imp = imp_implementationWithBlock(unsafeBitCast(block, to: AnyObject.self))
         
         guard let method = _aspector_getMethod(`class`, selector: forward_invocation_sel) else {
-            throw HooksError.getMethodFailed(obj: `class`, selector: forward_invocation_sel)
+            throw ForwardError.getMethodFailed(obj: `class`, selector: forward_invocation_sel)
         }
         
         let typeEncoding = method_getTypeEncoding(
@@ -267,7 +267,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         
         let selector = _aspector_selector(for: forward_invocation_sel)
         guard let method = _aspector_getMethod(`class`, selector: selector) else {
-            throw HooksError.getMethodFailed(obj: `class`, selector: forward_invocation_sel)
+            throw ForwardError.getMethodFailed(obj: `class`, selector: forward_invocation_sel)
         }
         
         class_replaceMethod(
@@ -311,7 +311,7 @@ public struct IsaForward: ObjCRuntimeForwardable {
         let class_imp = imp_implementationWithBlock(unsafeBitCast(class_block, to: AnyObject.self))
         
         guard let class_method = _aspector_getMethod(`class`, selector: class_sel) else {
-            throw HooksError.getMethodFailed(obj: `class`, selector: class_sel)
+            throw ForwardError.getMethodFailed(obj: `class`, selector: class_sel)
         }
         
         let typeEncoding = method_getTypeEncoding(
@@ -345,7 +345,7 @@ public struct IsaForward: ObjCRuntimeForwardable {
         
         let selector = _aspector_selector(for: class_sel)
         guard let method = _aspector_getMethod(`class`, selector: selector) else {
-            throw HooksError.getMethodFailed(obj: `class`, selector: class_sel)
+            throw ForwardError.getMethodFailed(obj: `class`, selector: class_sel)
         }
         
         class_replaceMethod(
@@ -367,7 +367,7 @@ public struct MessageForward: ObjCRuntimeForwardable {
     
     public func forward() throws {
         guard let method = _aspector_getMethod(`class`, selector: selector) else {
-            throw HooksError.getMethodFailed(obj: `class`, selector: selector)
+            throw ForwardError.getMethodFailed(obj: `class`, selector: selector)
         }
         
         let typeEncoding = method_getTypeEncoding(
@@ -394,7 +394,7 @@ public struct MessageForward: ObjCRuntimeForwardable {
     
     public func invalid() throws {
         guard let method = _aspector_getMethod(`class`, selector: _aspector_selector(for: selector)) else {
-            throw HooksError.getMethodFailed(obj: `class`, selector: selector)
+            throw ForwardError.getMethodFailed(obj: `class`, selector: selector)
         }
         
         class_replaceMethod(

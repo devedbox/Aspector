@@ -32,11 +32,11 @@ final class AspectorTests: XCTestCase {
         let obj = UIViewController()
         let cls = try! hook(obj, strategy: .before, selector: NSSelectorFromString("loadView"), patcher: {
             print("This is a before patcher........")
-            throw HooksError.duplicateSubClass(class: UIViewController.self)
+            throw ForwardError.duplicateSubClass(class: UIViewController.self)
         })
         let metaCls = try! hook(UIViewController.self, strategy: .after, selector: NSSelectorFromString("classFunc"), patcher: {
             print("This is a after patcher........of UIViewController.Type")
-            throw HooksError.duplicateSubClass(class: UIViewController.self)
+            throw ForwardError.duplicateSubClass(class: UIViewController.self)
         })
         print(cls)
         print(metaCls)
