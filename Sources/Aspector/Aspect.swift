@@ -29,7 +29,10 @@ public protocol Aspectable {
 }
 
 extension Aspectable {
-    public func dispatch<I, R>(_ dispatcher: Dispatcher<I, R>, patcher: Patcher<I>) rethrows -> R {
+    public func dispatch<I, R>(
+        _ dispatcher: Dispatcher<I, R>,
+        patcher: Patcher<I>) rethrows -> R
+    {
         return try Aspector._dispatch(self, patcher: patcher, dispatcher: dispatcher)
     }
 }
@@ -42,7 +45,10 @@ public struct Aspect<T>: Aspectable {
     public let obj: T
     public let strategy: AspectStrategy
     
-    public init(_ strategy: AspectStrategy, _ obj: T) {
+    public init(
+        _ strategy: AspectStrategy,
+        _ obj: T)
+    {
         self.strategy = strategy
         self.obj = obj
     }
@@ -54,7 +60,10 @@ public struct MetaAspect<T>: Aspectable {
     public let obj: T.Type
     public let strategy: AspectStrategy
     
-    public init(_ strategy: AspectStrategy, _ obj: T.Type) {
+    public init(
+        _ strategy: AspectStrategy,
+        _ obj: T.Type)
+    {
         self.strategy = strategy
         self.obj = obj
     }

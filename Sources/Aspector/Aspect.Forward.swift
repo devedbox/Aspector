@@ -433,18 +433,25 @@ public struct MessageForward: ObjCRuntimeForwardable {
 
 // MARK: - Helper.
 
-private func _aspector_selector(for selector: Selector) -> Selector {
+private func _aspector_selector(
+    for selector: Selector) -> Selector
+{
     return Selector(_AspectorLiteral + String(cString: sel_getName(selector)))
 }
 
-private func _aspector_getMethod(_ cls: AnyClass, selector: Selector) -> Method? {
+private func _aspector_getMethod(
+    _ cls: AnyClass,
+    selector: Selector) -> Method? {
     if class_isMetaClass(cls) {
         return class_getClassMethod(cls, selector)
     }
     return class_getInstanceMethod(cls, selector)
 }
 
-private func _aspector_responds_to(_ obj: AnyObject, selector: Selector) -> Bool {
+private func _aspector_responds_to(
+    _ obj: AnyObject,
+    selector: Selector) -> Bool
+{
     guard let obj_t = object_getClass(obj) else {
         return false
     }
@@ -457,7 +464,9 @@ private func _aspector_responds_to(_ obj: AnyObject, selector: Selector) -> Bool
 }
 
 @discardableResult
-private func _aspector_remove_blocked_imp(_ obj_t: AnyClass, selector: Selector) -> Bool {
+private func _aspector_remove_blocked_imp(
+    _ obj_t: AnyClass, selector: Selector) -> Bool
+{
     let forward_method = _aspector_getMethod(
         obj_t,
         selector: selector
