@@ -30,13 +30,44 @@ final class AspectorTests: XCTestCase {
     
     func testHooks() {
         let obj = UIViewController()
-        let cls = try! hook(obj, strategy: .before, selector: NSSelectorFromString("loadView"), patcher: { nil })
-        let metaCls = try! hook(UIViewController.self, strategy: .before, selector: NSSelectorFromString("classFunc"), patcher: { nil })
+        let cls = try! hook(obj, strategy: .before, selector: NSSelectorFromString("loadView"), patcher: {
+            print("This is a before patcher........")
+            throw HooksError.duplicateSubClass(class: UIViewController.self)
+        })
+        let metaCls = try! hook(UIViewController.self, strategy: .after, selector: NSSelectorFromString("classFunc"), patcher: {
+            print("This is a after patcher........of UIViewController.Type")
+            throw HooksError.duplicateSubClass(class: UIViewController.self)
+        })
         print(cls)
         print(metaCls)
         obj.loadView()
         UIViewController.classFunc()
         print(obj.perform(NSSelectorFromString("class")))
+        
+        try! cls.invalid()
+        try! metaCls.invalid()
+        
+        obj.loadView()
+        UIViewController.classFunc()
+        print(obj.perform(NSSelectorFromString("class")))
+        
+        try! hook(obj, strategy: .before, selector: NSSelectorFromString("loadView"), patcher: { nil })
+        try! hook(UIViewController.self, strategy: .before, selector: NSSelectorFromString("classFunc"), patcher: { nil })
+        
+        try! cls.invalid()
+        try! metaCls.invalid()
+        
+        try! hook(obj, strategy: .before, selector: NSSelectorFromString("loadView"), patcher: { nil })
+        try! hook(UIViewController.self, strategy: .before, selector: NSSelectorFromString("classFunc"), patcher: { nil })
+        
+        try! cls.invalid()
+        try! metaCls.invalid()
+        
+        try! hook(obj, strategy: .before, selector: NSSelectorFromString("loadView"), patcher: { nil })
+        try! hook(UIViewController.self, strategy: .before, selector: NSSelectorFromString("classFunc"), patcher: { nil })
+        
+        try! cls.invalid()
+        try! metaCls.invalid()
     }
 
     static var allTests = [
