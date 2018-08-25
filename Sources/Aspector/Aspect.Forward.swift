@@ -7,7 +7,7 @@
 
 import Foundation
 import ObjectiveC
-import ObjC
+import _ObjC
 
 // MARK: Error.
 

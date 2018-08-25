@@ -1,0 +1,4 @@
+module _ObjC {
+    umbrella "/Users/devedbox/Documents/Github/Aspector/Sources/_ObjC/include"
+    export *
+}

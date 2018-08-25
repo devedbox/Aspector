@@ -55,25 +55,6 @@
          path = "AspectorTests.xctest";
          sourceTree = "BUILT_PRODUCTS_DIR";
       };
-      "Aspector::ObjC" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_64";
-         buildPhases = (
-            "OBJ_67",
-            "OBJ_69"
-         );
-         dependencies = (
-         );
-         name = "ObjC";
-         productName = "ObjC";
-         productReference = "Aspector::ObjC::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "Aspector::ObjC::Product" = {
-         isa = "PBXFileReference";
-         path = "ObjC.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
       "Aspector::SwiftPMPackageDescription" = {
          isa = "PBXNativeTarget";
          buildConfigurationList = "OBJ_42";
@@ -85,6 +66,25 @@
          name = "AspectorPackageDescription";
          productName = "AspectorPackageDescription";
          productType = "com.apple.product-type.framework";
+      };
+      "Aspector::_ObjC" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_64";
+         buildPhases = (
+            "OBJ_67",
+            "OBJ_69"
+         );
+         dependencies = (
+         );
+         name = "_ObjC";
+         productName = "_ObjC";
+         productReference = "Aspector::_ObjC::Product";
+         productType = "com.apple.product-type.framework";
+      };
+      "Aspector::_ObjC::Product" = {
+         isa = "PBXFileReference";
+         path = "_ObjC.framework";
+         sourceTree = "BUILT_PRODUCTS_DIR";
       };
       "OBJ_1" = {
          isa = "PBXProject";
@@ -106,65 +106,67 @@
             "Aspector::SwiftPMPackageDescription",
             "Aspector::AspectorPackageTests::ProductTarget",
             "Aspector::AspectorTests",
-            "Aspector::ObjC"
+            "Aspector::_ObjC"
          );
       };
       "OBJ_10" = {
          isa = "PBXFileReference";
-         path = "objc.m";
+         path = "Aspect.NSObject.swift";
          sourceTree = "<group>";
       };
       "OBJ_11" = {
+         isa = "PBXFileReference";
+         path = "Aspect.UIKit.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_12" = {
+         isa = "PBXFileReference";
+         path = "Aspect.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_13" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_12",
-            "OBJ_13"
+            "OBJ_14",
+            "OBJ_16"
+         );
+         name = "_ObjC";
+         path = "Sources/_ObjC";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_14" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_15"
+         );
+         name = "src";
+         path = "src";
+         sourceTree = "<group>";
+      };
+      "OBJ_15" = {
+         isa = "PBXFileReference";
+         path = "objc.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_16" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_17",
+            "OBJ_18"
          );
          name = "include";
          path = "include";
          sourceTree = "<group>";
       };
-      "OBJ_12" = {
+      "OBJ_17" = {
          isa = "PBXFileReference";
          path = "objc.h";
          sourceTree = "<group>";
       };
-      "OBJ_13" = {
-         isa = "PBXFileReference";
-         name = "module.modulemap";
-         path = "/Users/devedbox/Documents/Github/Aspector/Aspector.xcodeproj/GeneratedModuleMap/ObjC/module.modulemap";
-         sourceTree = "<group>";
-      };
-      "OBJ_14" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_15",
-            "OBJ_16",
-            "OBJ_17",
-            "OBJ_18"
-         );
-         name = "Aspector";
-         path = "Sources/Aspector";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_15" = {
-         isa = "PBXFileReference";
-         path = "Aspect.Forward.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_16" = {
-         isa = "PBXFileReference";
-         path = "Aspect.NSObject.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_17" = {
-         isa = "PBXFileReference";
-         path = "Aspect.UIKit.swift";
-         sourceTree = "<group>";
-      };
       "OBJ_18" = {
          isa = "PBXFileReference";
-         path = "Aspect.swift";
+         name = "module.modulemap";
+         path = "/Users/devedbox/Documents/Github/Aspector/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap";
          sourceTree = "<group>";
       };
       "OBJ_19" = {
@@ -214,7 +216,7 @@
          isa = "PBXGroup";
          children = (
             "Aspector::AspectorTests::Product",
-            "Aspector::ObjC::Product",
+            "Aspector::_ObjC::Product",
             "Aspector::Aspector::Product"
          );
          name = "Products";
@@ -279,8 +281,8 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Sources/ObjC/include",
-               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC"
+               "$(SRCROOT)/Sources/_ObjC/include",
+               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC"
             );
             INFOPLIST_FILE = "Aspector.xcodeproj/Aspector_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -296,7 +298,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Aspector";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -320,8 +322,8 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Sources/ObjC/include",
-               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC"
+               "$(SRCROOT)/Sources/_ObjC/include",
+               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC"
             );
             INFOPLIST_FILE = "Aspector.xcodeproj/Aspector_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -337,7 +339,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Aspector";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -362,19 +364,19 @@
       };
       "OBJ_33" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_15";
+         fileRef = "OBJ_9";
       };
       "OBJ_34" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_16";
+         fileRef = "OBJ_10";
       };
       "OBJ_35" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_17";
+         fileRef = "OBJ_11";
       };
       "OBJ_36" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_18";
+         fileRef = "OBJ_12";
       };
       "OBJ_37" = {
          isa = "PBXFrameworksBuildPhase";
@@ -384,11 +386,11 @@
       };
       "OBJ_38" = {
          isa = "PBXBuildFile";
-         fileRef = "Aspector::ObjC::Product";
+         fileRef = "Aspector::_ObjC::Product";
       };
       "OBJ_39" = {
          isa = "PBXTargetDependency";
-         target = "Aspector::ObjC";
+         target = "Aspector::_ObjC";
       };
       "OBJ_4" = {
          isa = "XCBuildConfiguration";
@@ -534,8 +536,8 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Sources/ObjC/include",
-               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC"
+               "$(SRCROOT)/Sources/_ObjC/include",
+               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC"
             );
             INFOPLIST_FILE = "Aspector.xcodeproj/AspectorTests_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -552,7 +554,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap"
             );
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
@@ -573,8 +575,8 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Sources/ObjC/include",
-               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC"
+               "$(SRCROOT)/Sources/_ObjC/include",
+               "$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC"
             );
             INFOPLIST_FILE = "Aspector.xcodeproj/AspectorTests_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -591,7 +593,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/ObjC/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap"
             );
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
@@ -635,7 +637,7 @@
       };
       "OBJ_61" = {
          isa = "PBXBuildFile";
-         fileRef = "Aspector::ObjC::Product";
+         fileRef = "Aspector::_ObjC::Product";
       };
       "OBJ_62" = {
          isa = "PBXTargetDependency";
@@ -643,7 +645,7 @@
       };
       "OBJ_63" = {
          isa = "PBXTargetDependency";
-         target = "Aspector::ObjC";
+         target = "Aspector::_ObjC";
       };
       "OBJ_64" = {
          isa = "XCConfigurationList";
@@ -665,9 +667,9 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Sources/ObjC/include"
+               "$(SRCROOT)/Sources/_ObjC/include"
             );
-            INFOPLIST_FILE = "Aspector.xcodeproj/ObjC_Info.plist";
+            INFOPLIST_FILE = "Aspector.xcodeproj/_ObjC_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
                "$(inherited)",
                "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
@@ -681,14 +683,14 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)"
             );
-            PRODUCT_BUNDLE_IDENTIFIER = "ObjC";
+            PRODUCT_BUNDLE_IDENTIFIER = "-ObjC";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
             PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
             SKIP_INSTALL = "YES";
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
             );
-            TARGET_NAME = "ObjC";
+            TARGET_NAME = "_ObjC";
          };
          name = "Debug";
       };
@@ -703,9 +705,9 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Sources/ObjC/include"
+               "$(SRCROOT)/Sources/_ObjC/include"
             );
-            INFOPLIST_FILE = "Aspector.xcodeproj/ObjC_Info.plist";
+            INFOPLIST_FILE = "Aspector.xcodeproj/_ObjC_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
                "$(inherited)",
                "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
@@ -719,14 +721,14 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)"
             );
-            PRODUCT_BUNDLE_IDENTIFIER = "ObjC";
+            PRODUCT_BUNDLE_IDENTIFIER = "-ObjC";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
             PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
             SKIP_INSTALL = "YES";
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
             );
-            TARGET_NAME = "ObjC";
+            TARGET_NAME = "_ObjC";
          };
          name = "Release";
       };
@@ -738,7 +740,7 @@
       };
       "OBJ_68" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_10";
+         fileRef = "OBJ_15";
       };
       "OBJ_69" = {
          isa = "PBXFrameworksBuildPhase";
@@ -749,7 +751,7 @@
          isa = "PBXGroup";
          children = (
             "OBJ_8",
-            "OBJ_14"
+            "OBJ_13"
          );
          name = "Sources";
          path = "";
@@ -759,19 +761,17 @@
          isa = "PBXGroup";
          children = (
             "OBJ_9",
-            "OBJ_11"
+            "OBJ_10",
+            "OBJ_11",
+            "OBJ_12"
          );
-         name = "ObjC";
-         path = "Sources/ObjC";
+         name = "Aspector";
+         path = "Sources/Aspector";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_9" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_10"
-         );
-         name = "src";
-         path = "src";
+         isa = "PBXFileReference";
+         path = "Aspect.Forward.swift";
          sourceTree = "<group>";
       };
    };
