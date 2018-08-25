@@ -18,7 +18,7 @@ public enum ForwardError: Error {
     case objectGetClassFailed(object: AnyObject)
 }
 
-private let _SubClassPrefix = "_Aspector_SubClass_"
+private let _AspectorSubClassPrefix = "_Aspector_SubClass_"
 private let _AspectorLiteral = "_aspector_"
 private let _AspectorForwardInvocation = "_aspector_forwardInvocation:"
 
@@ -132,7 +132,7 @@ public struct ClassForward {
         }
         
         if
-            case let subfied? = String(cString: class_getName(obj_t), encoding: .utf8)?.hasPrefix(_SubClassPrefix),
+            case let subfied? = String(cString: class_getName(obj_t), encoding: .utf8)?.hasPrefix(_AspectorSubClassPrefix),
             subfied
         {
             `class` = obj_t; return
@@ -142,7 +142,7 @@ public struct ClassForward {
             `class` = obj_t; return
         }
         
-        let cls_name = _SubClassPrefix + String(cString: class_getName(obj_t))
+        let cls_name = _AspectorSubClassPrefix + String(cString: class_getName(obj_t))
         
         if let sub_cls = objc_getClass(cls_name.withCString { $0 }) as? AnyClass {
             object_setClass(obj, sub_cls)
@@ -178,9 +178,9 @@ public struct ClassForward {
         
         if
             case var cls_name? = String(cString: class_getName(obj_t), encoding: .utf8),
-            cls_name.hasPrefix(_SubClassPrefix)
+            cls_name.hasPrefix(_AspectorSubClassPrefix)
         {
-            cls_name = cls_name.replacingOccurrences(of: _SubClassPrefix, with: "")
+            cls_name = cls_name.replacingOccurrences(of: _AspectorSubClassPrefix, with: "")
             if let original_cls = objc_getClass(cls_name.withCString { $0 }) as? AnyClass {
                 object_setClass(obj, original_cls)
             }
@@ -261,7 +261,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         
         class_addMethod( // Save.
             `class`,
-            NSSelectorFromString(_AspectorForwardInvocation),
+            Selector(_AspectorForwardInvocation),
             method_getImplementation(method),
             typeEncoding
         )
@@ -434,7 +434,7 @@ public struct MessageForward: ObjCRuntimeForwardable {
 // MARK: - Helper.
 
 private func _aspector_selector(for selector: Selector) -> Selector {
-    return NSSelectorFromString(_AspectorLiteral + String(cString: sel_getName(selector)))
+    return Selector(_AspectorLiteral + String(cString: sel_getName(selector)))
 }
 
 private func _aspector_getMethod(_ cls: AnyClass, selector: Selector) -> Method? {
