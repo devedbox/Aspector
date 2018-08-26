@@ -218,12 +218,17 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         let selector = asp_invocation.selector
         let asp_selector = _aspector_selector(for: selector)
         
-        let invocationForward = Forward.Storage.first(
-            where: { $0.class.obj === obj && $0.message.selector == selector }
+        let invocationForward = Forward._forward(
+            for: obj,
+            selector: selector
         )
         
         do {
-            try invocationForward?.class.invocation?.befores.forEach { try $0(asp_invocation.arguments()) }
+            try invocationForward?.class.invocation?.befores.forEach {
+                try $0(
+                    asp_invocation.arguments()
+                )
+            }
         } catch _ { return }
         
         if _aspector_responds_to(target, selector: asp_selector) {
@@ -231,7 +236,11 @@ public struct InvocationForward: ObjCRuntimeForwardable {
             asp_invocation.invoke()
             
             do {
-                try invocationForward?.class.invocation?.afters.forEach { try $0(asp_invocation.returnValue() as Any) }
+                try invocationForward?.class.invocation?.afters.forEach {
+                    try $0(
+                        asp_invocation.returnValue() as Any
+                    )
+                }
             } catch _ { return }
         } else {
             let originalInvSel = NSSelectorFromString(_AspectorForwardInvocation)
@@ -242,7 +251,9 @@ public struct InvocationForward: ObjCRuntimeForwardable {
                     invocation
                 )
             } else {
-                obj.doesNotRecognizeSelector(selector)
+                obj.doesNotRecognizeSelector(
+                    selector
+                )
             }
         }
     }
@@ -252,7 +263,10 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         let invocation_imp = imp_implementationWithBlock(unsafeBitCast(block, to: AnyObject.self))
         
         guard let method = _aspector_getMethod(`class`, selector: forward_invocation_sel) else {
-            throw ForwardError.getMethodFailed(obj: `class`, selector: forward_invocation_sel)
+            throw ForwardError.getMethodFailed(
+                obj: `class`,
+                selector: forward_invocation_sel
+            )
         }
         
         let typeEncoding = method_getTypeEncoding(
@@ -282,7 +296,10 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         
         let selector = _aspector_selector(for: forward_invocation_sel)
         guard let method = _aspector_getMethod(`class`, selector: selector) else {
-            throw ForwardError.getMethodFailed(obj: `class`, selector: forward_invocation_sel)
+            throw ForwardError.getMethodFailed(
+                obj: `class`,
+                selector: forward_invocation_sel
+            )
         }
         
         class_replaceMethod(
@@ -330,7 +347,10 @@ public struct IsaForward: ObjCRuntimeForwardable {
         let class_imp = imp_implementationWithBlock(unsafeBitCast(class_block, to: AnyObject.self))
         
         guard let class_method = _aspector_getMethod(`class`, selector: class_sel) else {
-            throw ForwardError.getMethodFailed(obj: `class`, selector: class_sel)
+            throw ForwardError.getMethodFailed(
+                obj: `class`,
+                selector: class_sel
+            )
         }
         
         let typeEncoding = method_getTypeEncoding(
@@ -364,7 +384,10 @@ public struct IsaForward: ObjCRuntimeForwardable {
         
         let selector = _aspector_selector(for: class_sel)
         guard let method = _aspector_getMethod(`class`, selector: selector) else {
-            throw ForwardError.getMethodFailed(obj: `class`, selector: class_sel)
+            throw ForwardError.getMethodFailed(
+                obj: `class`,
+                selector: class_sel
+            )
         }
         
         class_replaceMethod(
@@ -388,7 +411,10 @@ public struct MessageForward: ObjCRuntimeForwardable {
     
     public func forward() throws {
         guard let method = _aspector_getMethod(`class`, selector: selector) else {
-            throw ForwardError.getMethodFailed(obj: `class`, selector: selector)
+            throw ForwardError.getMethodFailed(
+                obj: `class`,
+                selector: selector
+            )
         }
         
         let typeEncoding = method_getTypeEncoding(
@@ -415,7 +441,10 @@ public struct MessageForward: ObjCRuntimeForwardable {
     
     public func invalid() throws {
         guard let method = _aspector_getMethod(`class`, selector: _aspector_selector(for: selector)) else {
-            throw ForwardError.getMethodFailed(obj: `class`, selector: selector)
+            throw ForwardError.getMethodFailed(
+                obj: `class`,
+                selector: selector
+            )
         }
         
         class_replaceMethod(
