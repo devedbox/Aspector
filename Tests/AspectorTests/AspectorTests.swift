@@ -15,6 +15,28 @@ extension UIViewController {
     }
 }
 
+public class DynamicClass {
+    @objc
+    dynamic var dynamicVar: Int
+    
+    init(_ val: Int) {
+        dynamicVar = val
+    }
+    
+    @objc
+    dynamic func dynamicFunc(_ val: Int) -> Int {
+        return val
+    }
+}
+
+public struct PureSwiftType {
+    public let val: Int
+    
+    public func joke(_ val: Int) -> Int {
+        return val
+    }
+}
+
 final class AspectorTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
@@ -32,6 +54,24 @@ final class AspectorTests: XCTestCase {
             
         }
          */
+    }
+    
+    func testDynamic() {
+        // let dynamic = DynamicClass(0)
+        let dynamic = PureSwiftType(val: 1)
+        let cls: AnyClass? = object_getClass(dynamic)
+        
+        print(object_getClass(Aspect<Int>(.before, 0)) as Any)
+        print(cls as Any)
+        print(class_getSuperclass(cls) as Any)
+        print(class_getSuperclass(class_getSuperclass(cls)) as Any)
+        
+        var count_of_method: UInt32 = 0
+        let methods = class_copyMethodList(cls, &count_of_method)
+        
+        for m in 0..<count_of_method {
+            methods.map { print(method_getName($0.advanced(by: Int(m)).pointee)) }
+        }
     }
     
     func testHooks() {
