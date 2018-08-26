@@ -92,7 +92,7 @@ public struct Forward {
         try message.invalid()
         
         Forward._removeForward(
-            for: `class`.obj,
+            for: `class`.object,
             selector: message.selector
         )
     }
@@ -102,12 +102,12 @@ public struct Forward {
 
 extension Forward {
     fileprivate static func _forward(for obj: AnyObject, selector: Selector) -> Forward? {
-        return Storage.first(where: { $0.class.obj === obj && $0.message.selector == selector })
+        return Storage.first(where: { $0.class.object === obj && $0.message.selector == selector })
     }
     
     @discardableResult
     fileprivate static func _removeForward(for obj: AnyObject, selector: Selector) -> Forward? {
-        return Storage.firstIndex(where: { $0.class.obj === obj && $0.message.selector == selector }).map {
+        return Storage.firstIndex(where: { $0.class.object === obj && $0.message.selector == selector }).map {
             Storage.remove(at: $0)
         }
     }
@@ -128,7 +128,7 @@ public protocol ObjCRuntimeForwardable {
 /// invocation to an instance of `InvocationForward`.
 public struct ClassForward {
     /// The object or class to hook with.
-    public let obj: AnyObject
+    public let object: AnyObject
     /// The actual class of the hooked object.
     public let `class`: AnyClass
     
@@ -140,17 +140,17 @@ public struct ClassForward {
     public init(
         _ obj: AnyObject) throws
     {
-        self.obj = obj
+        self.object = obj
         
-        guard let cls = obj.perform?(NSSelectorFromString("class"))?.takeRetainedValue() as? AnyClass
+        guard let obj_cls = obj.perform?(NSSelectorFromString("class"))?.takeRetainedValue() as? AnyClass
             , let obj_t = object_getClass(obj)
         else {
             throw ForwardError.objectGetClassFailed(object: obj)
         }
         
         if
-            case let subfied? = String(cString: class_getName(obj_t), encoding: .utf8)?.hasPrefix(_AspectorSubClassPrefix),
-            subfied
+            case let obj_t_name? = String(cString: class_getName(obj_t), encoding: .utf8),
+            obj_t_name.hasPrefix(_AspectorSubClassPrefix)
         {
             `class` = obj_t; return
         } else if class_isMetaClass(obj_t) {
@@ -159,47 +159,47 @@ public struct ClassForward {
             `class` = obj_t; return
         }
         
-        let cls_name = _AspectorSubClassPrefix + String(cString: class_getName(obj_t))
+        let obj_t_name = _AspectorSubClassPrefix + String(cString: class_getName(obj_t))
         
-        if let sub_cls = objc_getClass(cls_name.withCString { $0 }) as? AnyClass {
+        if let sub_cls = objc_getClass(obj_t_name.withCString { $0 }) as? AnyClass {
             object_setClass(obj, sub_cls)
             `class` = sub_cls; return
         }
         
-        guard let sub_cls = objc_allocateClassPair(obj_t, cls_name.withCString { $0 }, 0) else {
+        guard let sub_t = objc_allocateClassPair(obj_t, obj_t_name.withCString { $0 }, 0) else {
             throw ForwardError.allocateClassPairFailed(class: obj_t)
         }
         
-        invocation = InvocationForward(class: sub_cls)
+        invocation = InvocationForward(class: sub_t)
         isas = [
-            IsaForward(class: sub_cls, isaClass: cls),
-            IsaForward(class: object_getClass(sub_cls)!, isaClass: cls)
+            IsaForward(class: sub_t, isaClass: obj_cls),
+            IsaForward(class: object_getClass(sub_t)!, isaClass: obj_cls)
         ]
         
         try invocation?.forward()
         try isas.forEach { try $0.forward() }
         
-        objc_registerClassPair(sub_cls)
-        object_setClass(obj, sub_cls)
+        objc_registerClassPair(sub_t)
+        object_setClass(obj, sub_t)
         
-        `class` = sub_cls
+        `class` = sub_t
     }
     
     public func invalid() throws {
         try invocation?.invalid()
         // try isas.forEach { try $0.invalid() }
         
-        guard let obj_t = object_getClass(obj) else {
-            throw ForwardError.objectGetClassFailed(object: obj)
+        guard let obj_t = object_getClass(object) else {
+            throw ForwardError.objectGetClassFailed(object: object)
         }
         
         if
-            case var cls_name? = String(cString: class_getName(obj_t), encoding: .utf8),
-            cls_name.hasPrefix(_AspectorSubClassPrefix)
+            case var obj_t_name? = String(cString: class_getName(obj_t), encoding: .utf8),
+            obj_t_name.hasPrefix(_AspectorSubClassPrefix)
         {
-            cls_name = cls_name.replacingOccurrences(of: _AspectorSubClassPrefix, with: "")
-            if let original_cls = objc_getClass(cls_name.withCString { $0 }) as? AnyClass {
-                object_setClass(obj, original_cls)
+            obj_t_name = obj_t_name.replacingOccurrences(of: _AspectorSubClassPrefix, with: "")
+            if let original_obj_cls = objc_getClass(obj_t_name.withCString { $0 }) as? AnyClass {
+                object_setClass(object, original_obj_cls)
             }
         }
     }
@@ -226,8 +226,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
         invocation: AnyObject)
     {   
         guard let invocationClass = NSClassFromString("NSInvocation")
-            , let isa = invocation.isKind?(of: invocationClass)
-            , isa
+            , let isa = invocation.isKind?(of: invocationClass), isa
             , let asp_invocation = ASPInvocation(objcInvocation: invocation)
         else {
             return
