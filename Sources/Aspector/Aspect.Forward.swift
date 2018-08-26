@@ -125,7 +125,7 @@ public protocol ObjCRuntimeForwardable {
 /// A type to manage forwards of runtime message sending of the given object. For object instance,
 /// `ClassForward` will generate a subclass of the class of given object and point the class of the
 /// object to that class. For class instance, `ClassForward` will hook the `_objc_msgForward`
-/// invocation to an instance of `InvocationForwad`.
+/// invocation to an instance of `InvocationForward`.
 public struct ClassForward {
     /// The object or class to hook with.
     public let obj: AnyObject
