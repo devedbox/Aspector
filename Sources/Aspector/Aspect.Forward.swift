@@ -241,7 +241,7 @@ public struct InvocationForward: ObjCRuntimeForwardable {
             selector: selector
         )
         
-        do {
+        do { // Befores.
             try invocationForward?.class.invocation?.befores.forEach {
                 try $0(
                     asp_invocation.arguments()
@@ -249,17 +249,19 @@ public struct InvocationForward: ObjCRuntimeForwardable {
             }
         } catch _ { return }
         
-        if _aspector_responds_to(target, selector: asp_selector) {
-            asp_invocation.selector = asp_selector
-            asp_invocation.invoke()
-            
+        defer { // Afters.
             do {
                 try invocationForward?.class.invocation?.afters.forEach {
                     try $0(
                         asp_invocation.returnValue() as Any
                     )
                 }
-            } catch _ { return }
+            } catch _ { }
+        }
+        
+        if _aspector_responds_to(target, selector: asp_selector) {
+            asp_invocation.selector = asp_selector
+            asp_invocation.invoke()
         } else {
             let originalInvSel = NSSelectorFromString(_AspectorForwardInvocation)
             if _aspector_responds_to(obj, selector: originalInvSel) {
