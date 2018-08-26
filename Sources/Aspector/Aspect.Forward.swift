@@ -75,7 +75,10 @@ public struct Forward {
     public var `class`: ClassForward
     public let message: MessageForward
     
-    public init(class: ClassForward, message: MessageForward) {
+    public init(
+        class: ClassForward,
+        message: MessageForward)
+    {
         self.class = `class`
         self.message = message
     }
@@ -122,7 +125,9 @@ public struct ClassForward {
     public internal(set) var invocation: InvocationForward? = nil
     public internal(set) var isas: [IsaForward] = []
     
-    public init(_ obj: AnyObject) throws {
+    public init(
+        _ obj: AnyObject) throws
+    {
         self.obj = obj
         
         guard let cls = obj.perform?(NSSelectorFromString("class"))?.takeRetainedValue() as? AnyClass
@@ -198,11 +203,13 @@ public struct InvocationForward: ObjCRuntimeForwardable {
     internal var befores: [ForwardPatcher] = []
     internal var afters: [ForwardPatcher] = []
     
-    public init(class: AnyClass) {
+    public init(
+        class: AnyClass)
+    {
         self.class = `class`
     }
     
-    internal func forwardInvocation(
+    internal static func forwardInvocation(
         _ obj: AnyObject,
         invocation: AnyObject)
     {   
@@ -259,8 +266,13 @@ public struct InvocationForward: ObjCRuntimeForwardable {
     }
     
     public func forward() throws {
-        let block: @convention(block) (AnyObject, AnyObject) -> Void = forwardInvocation
-        let invocation_imp = imp_implementationWithBlock(unsafeBitCast(block, to: AnyObject.self))
+        let block: @convention(block) (AnyObject, AnyObject) -> Void = type(of: self).forwardInvocation
+        let invocation_imp = imp_implementationWithBlock(
+            unsafeBitCast(
+                block,
+                to: AnyObject.self
+            )
+        )
         
         guard let method = _aspector_getMethod(`class`, selector: forward_invocation_sel) else {
             throw ForwardError.getMethodFailed(
