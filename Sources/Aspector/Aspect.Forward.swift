@@ -241,22 +241,24 @@ public struct InvocationForward: ObjCRuntimeForwardable {
             selector: selector
         )
         
-        do { // Befores.
-            try invocationForward?.class.invocation?.befores.forEach {
-                try $0(
-                    asp_invocation.arguments()
+        let failures = invocationForward?.class.invocation?.befores.map {
+            try? $0(
+                asp_invocation.arguments()
+            )
+        }.filter {
+            $0 == nil
+        }
+        
+        if case let isEmpty? = failures?.isEmpty, !isEmpty {
+            return
+        }
+        
+        defer {
+            invocationForward?.class.invocation?.afters.forEach {
+                try? $0(
+                    asp_invocation.returnValue() as Any
                 )
             }
-        } catch _ { return }
-        
-        defer { // Afters.
-            do {
-                try invocationForward?.class.invocation?.afters.forEach {
-                    try $0(
-                        asp_invocation.returnValue() as Any
-                    )
-                }
-            } catch _ { }
         }
         
         if _aspector_responds_to(target, selector: asp_selector) {
