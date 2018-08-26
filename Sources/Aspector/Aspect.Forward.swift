@@ -70,9 +70,13 @@ public func forward(
 // MARK: - Forward.
 
 public struct Forward {
+    /// The shared storage of active instance of `Forward`. Every instance of `Forward` will be stored
+    /// in this container.
     internal static var Storage: [Forward] = []
     
+    /// The value of instance of `ClassForward`.
     public var `class`: ClassForward
+    /// The value of instance of `MessageForward`.
     public let message: MessageForward
     
     public init(
@@ -118,11 +122,19 @@ public protocol ObjCRuntimeForwardable {
 
 // MARK: - ClassForward.
 
+/// A type to manage forwards of runtime message sending of the given object. For object instance,
+/// `ClassForward` will generate a subclass of the class of given object and point the class of the
+/// object to that class. For class instance, `ClassForward` will hook the `_objc_msgForward`
+/// invocation to an instance of `InvocationForwad`.
 public struct ClassForward {
+    /// The object or class to hook with.
     public let obj: AnyObject
+    /// The actual class of the hooked object.
     public let `class`: AnyClass
     
+    /// The invocation forward instance of the class of given object.
     public internal(set) var invocation: InvocationForward? = nil
+    /// The isa forward instance of the class of given object.
     public internal(set) var isas: [IsaForward] = []
     
     public init(
