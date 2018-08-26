@@ -10,6 +10,9 @@ let package = Package(
         .library(
             name: "Aspector",
             targets: ["Aspector"]),
+        .library(
+            name: "ObjCRuntime",
+            targets: ["ObjCRuntime"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -22,8 +25,11 @@ let package = Package(
             name: "_ObjC",
             dependencies: []),
         .target(
+            name: "ObjCRuntime",
+            dependencies: []),
+        .target(
             name: "Aspector",
-            dependencies: ["_ObjC"]),
+            dependencies: ["_ObjC", "ObjCRuntime"]),
         .testTarget(
             name: "AspectorTests",
             dependencies: ["Aspector"]),

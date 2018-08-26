@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Aspector::_ObjC"
-               BuildableName = "_ObjC.framework"
-               BlueprintName = "_ObjC"
+               BlueprintIdentifier = "Aspector::Aspector"
+               BuildableName = "Aspector.framework"
+               BlueprintName = "Aspector"
                ReferencedContainer = "container:Aspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Aspector::Aspector"
-               BuildableName = "Aspector.framework"
-               BlueprintName = "Aspector"
+               BlueprintIdentifier = "Aspector::ObjCRuntime"
+               BuildableName = "ObjCRuntime.framework"
+               BlueprintName = "ObjCRuntime"
+               ReferencedContainer = "container:Aspector.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Aspector::_ObjC"
+               BuildableName = "_ObjC.framework"
+               BlueprintName = "_ObjC"
                ReferencedContainer = "container:Aspector.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -69,9 +83,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Aspector::_ObjC"
-            BuildableName = "_ObjC.framework"
-            BlueprintName = "_ObjC"
+            BlueprintIdentifier = "Aspector::Aspector"
+            BuildableName = "Aspector.framework"
+            BlueprintName = "Aspector"
             ReferencedContainer = "container:Aspector.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

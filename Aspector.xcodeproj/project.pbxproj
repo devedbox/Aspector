@@ -9,11 +9,11 @@
 /* Begin PBXAggregateTarget section */
 		"Aspector::AspectorPackageTests::ProductTarget" /* AspectorPackageTests */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_48 /* Build configuration list for PBXAggregateTarget "AspectorPackageTests" */;
+			buildConfigurationList = OBJ_52 /* Build configuration list for PBXAggregateTarget "AspectorPackageTests" */;
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_51 /* PBXTargetDependency */,
+				OBJ_55 /* PBXTargetDependency */,
 			);
 			name = AspectorPackageTests;
 			productName = AspectorPackageTests;
@@ -21,41 +21,62 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		OBJ_33 /* Aspect.Forward.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Aspect.Forward.swift */; };
-		OBJ_34 /* Aspect.NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Aspect.NSObject.swift */; };
-		OBJ_36 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Aspect.swift */; };
-		OBJ_38 /* _ObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::_ObjC::Product" /* _ObjC.framework */; };
-		OBJ_46 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_57 /* AspectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* AspectorTests.swift */; };
-		OBJ_58 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* XCTestManifests.swift */; };
-		OBJ_60 /* Aspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::Aspector::Product" /* Aspector.framework */; };
-		OBJ_61 /* _ObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::_ObjC::Product" /* _ObjC.framework */; };
-		OBJ_68 /* objc.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* objc.m */; };
+		DC5E857D2132EF5E003F8464 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E857C2132EF5E003F8464 /* Class.swift */; };
+		DC5E857F2132F0C2003F8464 /* Ivar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E857E2132F0C2003F8464 /* Ivar.swift */; };
+		DC5E85812132F672003F8464 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E85802132F672003F8464 /* Property.swift */; };
+		DC5E85832132F7EF003F8464 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E85822132F7EF003F8464 /* Method.swift */; };
+		DC5E85852132FCB2003F8464 /* Property.Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E85842132FCB2003F8464 /* Property.Attribute.swift */; };
+		OBJ_35 /* Aspect.Forward.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Aspect.Forward.swift */; };
+		OBJ_36 /* Aspect.NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Aspect.NSObject.swift */; };
+		OBJ_37 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Aspect.swift */; };
+		OBJ_39 /* ObjCRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::ObjCRuntime::Product" /* ObjCRuntime.framework */; };
+		OBJ_40 /* _ObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::_ObjC::Product" /* _ObjC.framework */; };
+		OBJ_50 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_61 /* AspectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* AspectorTests.swift */; };
+		OBJ_62 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* XCTestManifests.swift */; };
+		OBJ_64 /* Aspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::Aspector::Product" /* Aspector.framework */; };
+		OBJ_65 /* ObjCRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::ObjCRuntime::Product" /* ObjCRuntime.framework */; };
+		OBJ_66 /* _ObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::_ObjC::Product" /* _ObjC.framework */; };
+		OBJ_80 /* objc.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* objc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DC5E856D2131C362003F8464 /* PBXContainerItemProxy */ = {
+		DC5E85762132EEF3003F8464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Aspector::ObjCRuntime";
+			remoteInfo = ObjCRuntime;
+		};
+		DC5E85772132EEF3003F8464 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Aspector::_ObjC";
 			remoteInfo = _ObjC;
 		};
-		DC5E856E2131C362003F8464 /* PBXContainerItemProxy */ = {
+		DC5E85782132EEF3003F8464 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Aspector::Aspector";
 			remoteInfo = Aspector;
 		};
-		DC5E856F2131C362003F8464 /* PBXContainerItemProxy */ = {
+		DC5E85792132EEF3003F8464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Aspector::ObjCRuntime";
+			remoteInfo = ObjCRuntime;
+		};
+		DC5E857A2132EEF3003F8464 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "Aspector::_ObjC";
 			remoteInfo = _ObjC;
 		};
-		DC5E85702131C363003F8464 /* PBXContainerItemProxy */ = {
+		DC5E857B2132EEF3003F8464 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -66,39 +87,54 @@
 
 /* Begin PBXFileReference section */
 		"Aspector::Aspector::Product" /* Aspector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Aspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Aspector::AspectorTests::Product" /* AspectorTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AspectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Aspector::AspectorTests::Product" /* AspectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = AspectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Aspector::ObjCRuntime::Product" /* ObjCRuntime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjCRuntime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Aspector::_ObjC::Product" /* _ObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = _ObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_10 /* Aspect.NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.NSObject.swift; sourceTree = "<group>"; };
-		OBJ_12 /* Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
-		OBJ_15 /* objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = objc.m; sourceTree = "<group>"; };
-		OBJ_17 /* objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
-		OBJ_18 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = /Users/devedbox/Documents/Github/Aspector/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap; sourceTree = "<group>"; };
-		OBJ_21 /* AspectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectorTests.swift; sourceTree = "<group>"; };
-		OBJ_22 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
-		OBJ_23 /* AspectorLib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AspectorLib; sourceTree = SOURCE_ROOT; };
+		DC5E857C2132EF5E003F8464 /* Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
+		DC5E857E2132F0C2003F8464 /* Ivar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ivar.swift; sourceTree = "<group>"; };
+		DC5E85802132F672003F8464 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		DC5E85822132F7EF003F8464 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		DC5E85842132FCB2003F8464 /* Property.Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.Attribute.swift; sourceTree = "<group>"; };
+		OBJ_10 /* objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = objc.m; sourceTree = "<group>"; };
+		OBJ_12 /* objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
+		OBJ_13 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = /Users/devedbox/Documents/Github/Aspector/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap; sourceTree = "<group>"; };
+		OBJ_15 /* Aspect.Forward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Forward.swift; sourceTree = "<group>"; };
+		OBJ_16 /* Aspect.NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.NSObject.swift; sourceTree = "<group>"; };
+		OBJ_17 /* Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
+		OBJ_22 /* AspectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectorTests.swift; sourceTree = "<group>"; };
+		OBJ_23 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		OBJ_24 /* AspectorLib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AspectorLib; sourceTree = SOURCE_ROOT; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_9 /* Aspect.Forward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Forward.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_37 /* Frameworks */ = {
+		OBJ_38 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_38 /* _ObjC.framework in Frameworks */,
+				OBJ_39 /* ObjCRuntime.framework in Frameworks */,
+				OBJ_40 /* _ObjC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_59 /* Frameworks */ = {
+		OBJ_63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_60 /* Aspector.framework in Frameworks */,
-				OBJ_61 /* _ObjC.framework in Frameworks */,
+				OBJ_64 /* Aspector.framework in Frameworks */,
+				OBJ_65 /* ObjCRuntime.framework in Frameworks */,
+				OBJ_66 /* _ObjC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_69 /* Frameworks */ = {
+		OBJ_75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_81 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -108,57 +144,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_13 /* _ObjC */ = {
+		OBJ_11 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_14 /* src */,
-				OBJ_16 /* include */,
-			);
-			name = _ObjC;
-			path = Sources/_ObjC;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_14 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_15 /* objc.m */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		OBJ_16 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_17 /* objc.h */,
-				OBJ_18 /* module.modulemap */,
+				OBJ_12 /* objc.h */,
+				OBJ_13 /* module.modulemap */,
 			);
 			path = include;
 			sourceTree = "<group>";
 		};
-		OBJ_19 /* Tests */ = {
+		OBJ_14 /* Aspector */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_20 /* AspectorTests */,
+				OBJ_15 /* Aspect.Forward.swift */,
+				OBJ_16 /* Aspect.NSObject.swift */,
+				OBJ_17 /* Aspect.swift */,
+			);
+			name = Aspector;
+			path = Sources/Aspector;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_18 /* ObjCRuntime */ = {
+			isa = PBXGroup;
+			children = (
+				DC5E857C2132EF5E003F8464 /* Class.swift */,
+				DC5E857E2132F0C2003F8464 /* Ivar.swift */,
+				DC5E85802132F672003F8464 /* Property.swift */,
+				DC5E85842132FCB2003F8464 /* Property.Attribute.swift */,
+				DC5E85822132F7EF003F8464 /* Method.swift */,
+			);
+			name = ObjCRuntime;
+			path = Sources/ObjCRuntime;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_20 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_21 /* AspectorTests */,
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_20 /* AspectorTests */ = {
+		OBJ_21 /* AspectorTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_21 /* AspectorTests.swift */,
-				OBJ_22 /* XCTestManifests.swift */,
+				OBJ_22 /* AspectorTests.swift */,
+				OBJ_23 /* XCTestManifests.swift */,
 			);
 			name = AspectorTests;
 			path = Tests/AspectorTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_24 /* Products */ = {
+		OBJ_25 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				"Aspector::Aspector::Product" /* Aspector.framework */,
+				"Aspector::ObjCRuntime::Product" /* ObjCRuntime.framework */,
 				"Aspector::AspectorTests::Product" /* AspectorTests.xctest */,
 				"Aspector::_ObjC::Product" /* _ObjC.framework */,
-				"Aspector::Aspector::Product" /* Aspector.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -168,9 +211,9 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_19 /* Tests */,
-				OBJ_23 /* AspectorLib */,
-				OBJ_24 /* Products */,
+				OBJ_20 /* Tests */,
+				OBJ_24 /* AspectorLib */,
+				OBJ_25 /* Products */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -178,37 +221,46 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* Aspector */,
-				OBJ_13 /* _ObjC */,
+				OBJ_8 /* _ObjC */,
+				OBJ_14 /* Aspector */,
+				OBJ_18 /* ObjCRuntime */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_8 /* Aspector */ = {
+		OBJ_8 /* _ObjC */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* Aspect.Forward.swift */,
-				OBJ_10 /* Aspect.NSObject.swift */,
-				OBJ_12 /* Aspect.swift */,
+				OBJ_9 /* src */,
+				OBJ_11 /* include */,
 			);
-			name = Aspector;
-			path = Sources/Aspector;
+			name = _ObjC;
+			path = Sources/_ObjC;
 			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_10 /* objc.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		"Aspector::Aspector" /* Aspector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_29 /* Build configuration list for PBXNativeTarget "Aspector" */;
+			buildConfigurationList = OBJ_31 /* Build configuration list for PBXNativeTarget "Aspector" */;
 			buildPhases = (
-				OBJ_32 /* Sources */,
-				OBJ_37 /* Frameworks */,
+				OBJ_34 /* Sources */,
+				OBJ_38 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_39 /* PBXTargetDependency */,
+				OBJ_41 /* PBXTargetDependency */,
+				OBJ_43 /* PBXTargetDependency */,
 			);
 			name = Aspector;
 			productName = Aspector;
@@ -217,27 +269,44 @@
 		};
 		"Aspector::AspectorTests" /* AspectorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_53 /* Build configuration list for PBXNativeTarget "AspectorTests" */;
+			buildConfigurationList = OBJ_57 /* Build configuration list for PBXNativeTarget "AspectorTests" */;
 			buildPhases = (
-				OBJ_56 /* Sources */,
-				OBJ_59 /* Frameworks */,
+				OBJ_60 /* Sources */,
+				OBJ_63 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_62 /* PBXTargetDependency */,
-				OBJ_63 /* PBXTargetDependency */,
+				OBJ_67 /* PBXTargetDependency */,
+				OBJ_68 /* PBXTargetDependency */,
+				OBJ_69 /* PBXTargetDependency */,
 			);
 			name = AspectorTests;
 			productName = AspectorTests;
 			productReference = "Aspector::AspectorTests::Product" /* AspectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		"Aspector::ObjCRuntime" /* ObjCRuntime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_70 /* Build configuration list for PBXNativeTarget "ObjCRuntime" */;
+			buildPhases = (
+				OBJ_73 /* Sources */,
+				OBJ_75 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObjCRuntime;
+			productName = ObjCRuntime;
+			productReference = "Aspector::ObjCRuntime::Product" /* ObjCRuntime.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		"Aspector::SwiftPMPackageDescription" /* AspectorPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_42 /* Build configuration list for PBXNativeTarget "AspectorPackageDescription" */;
+			buildConfigurationList = OBJ_46 /* Build configuration list for PBXNativeTarget "AspectorPackageDescription" */;
 			buildPhases = (
-				OBJ_45 /* Sources */,
+				OBJ_49 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -249,10 +318,10 @@
 		};
 		"Aspector::_ObjC" /* _ObjC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_64 /* Build configuration list for PBXNativeTarget "_ObjC" */;
+			buildConfigurationList = OBJ_76 /* Build configuration list for PBXNativeTarget "_ObjC" */;
 			buildPhases = (
-				OBJ_67 /* Sources */,
-				OBJ_69 /* Frameworks */,
+				OBJ_79 /* Sources */,
+				OBJ_81 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +339,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"Aspector::ObjCRuntime" = {
+						LastSwiftMigration = 1000;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Aspector" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -279,7 +353,7 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_24 /* Products */;
+			productRefGroup = OBJ_25 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -287,69 +361,92 @@
 				"Aspector::SwiftPMPackageDescription" /* AspectorPackageDescription */,
 				"Aspector::AspectorPackageTests::ProductTarget" /* AspectorPackageTests */,
 				"Aspector::AspectorTests" /* AspectorTests */,
+				"Aspector::ObjCRuntime" /* ObjCRuntime */,
 				"Aspector::_ObjC" /* _ObjC */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_32 /* Sources */ = {
+		OBJ_34 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_33 /* Aspect.Forward.swift in Sources */,
-				OBJ_34 /* Aspect.NSObject.swift in Sources */,
-				OBJ_36 /* Aspect.swift in Sources */,
+				OBJ_35 /* Aspect.Forward.swift in Sources */,
+				OBJ_36 /* Aspect.NSObject.swift in Sources */,
+				OBJ_37 /* Aspect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_45 /* Sources */ = {
+		OBJ_49 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_46 /* Package.swift in Sources */,
+				OBJ_50 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_56 /* Sources */ = {
+		OBJ_60 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_57 /* AspectorTests.swift in Sources */,
-				OBJ_58 /* XCTestManifests.swift in Sources */,
+				OBJ_61 /* AspectorTests.swift in Sources */,
+				OBJ_62 /* XCTestManifests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_67 /* Sources */ = {
+		OBJ_73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_68 /* objc.m in Sources */,
+				DC5E85832132F7EF003F8464 /* Method.swift in Sources */,
+				DC5E85812132F672003F8464 /* Property.swift in Sources */,
+				DC5E85852132FCB2003F8464 /* Property.Attribute.swift in Sources */,
+				DC5E857D2132EF5E003F8464 /* Class.swift in Sources */,
+				DC5E857F2132F0C2003F8464 /* Ivar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_80 /* objc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_39 /* PBXTargetDependency */ = {
+		OBJ_41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Aspector::ObjCRuntime" /* ObjCRuntime */;
+			targetProxy = DC5E85762132EEF3003F8464 /* PBXContainerItemProxy */;
+		};
+		OBJ_43 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Aspector::_ObjC" /* _ObjC */;
-			targetProxy = DC5E856D2131C362003F8464 /* PBXContainerItemProxy */;
+			targetProxy = DC5E85772132EEF3003F8464 /* PBXContainerItemProxy */;
 		};
-		OBJ_51 /* PBXTargetDependency */ = {
+		OBJ_55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Aspector::AspectorTests" /* AspectorTests */;
-			targetProxy = DC5E85702131C363003F8464 /* PBXContainerItemProxy */;
+			targetProxy = DC5E857B2132EEF3003F8464 /* PBXContainerItemProxy */;
 		};
-		OBJ_62 /* PBXTargetDependency */ = {
+		OBJ_67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Aspector::Aspector" /* Aspector */;
-			targetProxy = DC5E856E2131C362003F8464 /* PBXContainerItemProxy */;
+			targetProxy = DC5E85782132EEF3003F8464 /* PBXContainerItemProxy */;
 		};
-		OBJ_63 /* PBXTargetDependency */ = {
+		OBJ_68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Aspector::ObjCRuntime" /* ObjCRuntime */;
+			targetProxy = DC5E85792132EEF3003F8464 /* PBXContainerItemProxy */;
+		};
+		OBJ_69 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Aspector::_ObjC" /* _ObjC */;
-			targetProxy = DC5E856F2131C362003F8464 /* PBXContainerItemProxy */;
+			targetProxy = DC5E857A2132EEF3003F8464 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -380,7 +477,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_30 /* Debug */ = {
+		OBJ_32 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -408,7 +505,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_31 /* Release */ = {
+		OBJ_33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
@@ -456,7 +553,7 @@
 			};
 			name = Release;
 		};
-		OBJ_43 /* Debug */ = {
+		OBJ_47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -465,7 +562,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_44 /* Release */ = {
+		OBJ_48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -474,21 +571,22 @@
 			};
 			name = Release;
 		};
-		OBJ_49 /* Debug */ = {
+		OBJ_53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		OBJ_50 /* Release */ = {
+		OBJ_54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		OBJ_54 /* Debug */ = {
+		OBJ_58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -511,9 +609,10 @@
 			};
 			name = Debug;
 		};
-		OBJ_55 /* Release */ = {
+		OBJ_59 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -536,7 +635,60 @@
 			};
 			name = Release;
 		};
-		OBJ_65 /* Debug */ = {
+		OBJ_71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Aspector.xcodeproj/ObjCRuntime_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ObjCRuntime;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = ObjCRuntime;
+			};
+			name = Debug;
+		};
+		OBJ_72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Aspector.xcodeproj/ObjCRuntime_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = ObjCRuntime;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = ObjCRuntime;
+			};
+			name = Release;
+		};
+		OBJ_77 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEFINES_MODULE = NO;
@@ -563,7 +715,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_66 /* Release */ = {
+		OBJ_78 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEFINES_MODULE = NO;
@@ -602,47 +754,56 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_29 /* Build configuration list for PBXNativeTarget "Aspector" */ = {
+		OBJ_31 /* Build configuration list for PBXNativeTarget "Aspector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_30 /* Debug */,
-				OBJ_31 /* Release */,
+				OBJ_32 /* Debug */,
+				OBJ_33 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_42 /* Build configuration list for PBXNativeTarget "AspectorPackageDescription" */ = {
+		OBJ_46 /* Build configuration list for PBXNativeTarget "AspectorPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_43 /* Debug */,
-				OBJ_44 /* Release */,
+				OBJ_47 /* Debug */,
+				OBJ_48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_48 /* Build configuration list for PBXAggregateTarget "AspectorPackageTests" */ = {
+		OBJ_52 /* Build configuration list for PBXAggregateTarget "AspectorPackageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_49 /* Debug */,
-				OBJ_50 /* Release */,
+				OBJ_53 /* Debug */,
+				OBJ_54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_53 /* Build configuration list for PBXNativeTarget "AspectorTests" */ = {
+		OBJ_57 /* Build configuration list for PBXNativeTarget "AspectorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_54 /* Debug */,
-				OBJ_55 /* Release */,
+				OBJ_58 /* Debug */,
+				OBJ_59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		OBJ_64 /* Build configuration list for PBXNativeTarget "_ObjC" */ = {
+		OBJ_70 /* Build configuration list for PBXNativeTarget "ObjCRuntime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_65 /* Debug */,
-				OBJ_66 /* Release */,
+				OBJ_71 /* Debug */,
+				OBJ_72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_76 /* Build configuration list for PBXNativeTarget "_ObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_77 /* Debug */,
+				OBJ_78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
