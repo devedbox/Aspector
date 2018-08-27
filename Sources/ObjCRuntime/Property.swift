@@ -26,13 +26,48 @@ extension Property {
         )
     }
     
-    public var attributes: String? {
+    public var attributeValues: String? {
         return property_getAttributes(
             _property
         ).map {
             String(
                 cString: $0
             )
+        }
+    }
+    
+    public func attributeValue(of name: String) -> String? {
+        return property_copyAttributeValue(
+            _property,
+            name.withCString {
+                $0
+            }
+        ).map {
+            String(
+                cString: $0
+            )
+        }
+    }
+    
+    public var attributes: [Attribute] {
+        var count: UInt32 = 0
+        let attrLists = property_copyAttributeList(
+            _property,
+            &count
+        )
+        
+        return (0..<count).map {
+            attrLists?.advanced(
+                by: Int(
+                    $0
+                )
+            ).pointee
+        }.compactMap {
+            $0.map {
+                Attribute(
+                    _attribute: $0
+                )
+            }
         }
     }
 }

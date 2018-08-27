@@ -12,9 +12,9 @@ extension Property {
         internal let _attribute: objc_property_attribute_t
         
         internal init(
-            _objc_property_attribute_t: objc_property_attribute_t)
+            _attribute: objc_property_attribute_t)
         {
-            self._attribute = _objc_property_attribute_t
+            self._attribute = _attribute
         }
         
         public init(
