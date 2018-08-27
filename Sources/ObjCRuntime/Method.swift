@@ -8,6 +8,12 @@
 import ObjectiveC
 
 public struct Method {
+    
+    public struct Description {
+        public let name: Selector?
+        public let typeEncoding: String?
+    }
+    
     private let _method: ObjectiveC.Method
     
     internal init(
@@ -19,8 +25,10 @@ public struct Method {
 
 extension Method {
     public var name: Selector {
-        return method_getName(
-            _method
+        return Selector(
+            _sel: method_getName(
+                _method
+            )
         )
     }
     
@@ -30,9 +38,84 @@ extension Method {
         )
     }
     
+    public func set(
+        imp: IMP) -> IMP
+    {
+        return method_setImplementation(
+            _method,
+            imp
+        )
+    }
+    
     public var types: UnsafePointer<Int8>? {
         return method_getTypeEncoding(
             _method
         )
+    }
+    
+    public static func exchange(
+        _ method1: Method,
+        another: Method)
+    {
+        method_exchangeImplementations(
+            method1._method,
+            method1._method
+        )
+    }
+}
+
+extension Method {
+    public var returnType: String {
+        return String(
+            cString: method_copyReturnType(
+                _method
+            )
+        )
+    }
+    
+    public var countOfArguments: UInt32 {
+        return method_getNumberOfArguments(
+            _method
+        )
+    }
+    
+    public func typeOfArgument(
+        at index: UInt32) -> String
+    {
+        let buffer = UnsafeMutablePointer<Int8>.allocate(
+            capacity: 512
+        )
+        method_getArgumentType(
+            _method,
+            index,
+            buffer,
+            512
+        )
+        return String(
+            cString: buffer
+        )
+    }
+}
+
+extension Method {
+    public var description: Description {
+        return Optional.some(
+            method_getDescription(
+                _method
+            ).pointee
+        ).map {
+            Description(
+                name: $0.name.map {
+                    Selector(
+                        _sel: $0
+                    )
+                },
+                typeEncoding: $0.types.map {
+                    String(
+                        cString: $0
+                    )
+                }
+            )
+        }!
     }
 }

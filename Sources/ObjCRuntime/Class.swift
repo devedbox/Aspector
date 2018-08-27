@@ -204,7 +204,7 @@ extension Class {
             },
             UnsafePointer<objc_property_attribute_t>(
                 attributes.map {
-                    $0._objc_property_attribute_t
+                    $0._attribute
                 }
             ),
             UInt32(
@@ -224,7 +224,7 @@ extension Class {
             },
             UnsafePointer<objc_property_attribute_t>(
                 attributes.map {
-                    $0._objc_property_attribute_t
+                    $0._attribute
                 }
             ),
             UInt32(
@@ -240,7 +240,7 @@ extension Class {
     {
         return class_addMethod(
             _class,
-            method.name,
+            method.name._sel,
             method.imp,
             method.types
         )
@@ -251,7 +251,7 @@ extension Class {
     {
         return class_getInstanceMethod(
             _class,
-            name
+            name._sel
         ).map {
             Method(
                 _method: $0
@@ -264,7 +264,7 @@ extension Class {
     {
         return class_getClassMethod(
             _class,
-            name
+            name._sel
         ).map {
             Method(
                 _method: $0
@@ -300,7 +300,7 @@ extension Class {
     {
         return class_replaceMethod(
             _class,
-            name,
+            name._sel,
             method.imp,
             method.types
         )
@@ -311,7 +311,7 @@ extension Class {
     {
         return class_getMethodImplementation(
             _class,
-            name
+            name._sel
         )
     }
     
@@ -320,7 +320,7 @@ extension Class {
     {
         return class_getMethodImplementation_stret(
             _class,
-            name
+            name._sel
         )
     }
     
@@ -329,7 +329,7 @@ extension Class {
     {
         return class_respondsToMethod(
             _class,
-            selector
+            selector._sel
         )
     }
 }

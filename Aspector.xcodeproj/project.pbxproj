@@ -26,6 +26,8 @@
 		DC5E85812132F672003F8464 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E85802132F672003F8464 /* Property.swift */; };
 		DC5E85832132F7EF003F8464 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E85822132F7EF003F8464 /* Method.swift */; };
 		DC5E85852132FCB2003F8464 /* Property.Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E85842132FCB2003F8464 /* Property.Attribute.swift */; };
+		DC5E8587213434A1003F8464 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8586213434A1003F8464 /* Object.swift */; };
+		DC5E858B21344070003F8464 /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E858A21344070003F8464 /* Selector.swift */; };
 		OBJ_35 /* Aspect.Forward.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Aspect.Forward.swift */; };
 		OBJ_36 /* Aspect.NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Aspect.NSObject.swift */; };
 		OBJ_37 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Aspect.swift */; };
@@ -95,6 +97,8 @@
 		DC5E85802132F672003F8464 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		DC5E85822132F7EF003F8464 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		DC5E85842132FCB2003F8464 /* Property.Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.Attribute.swift; sourceTree = "<group>"; };
+		DC5E8586213434A1003F8464 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		DC5E858A21344070003F8464 /* Selector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selector.swift; sourceTree = "<group>"; };
 		OBJ_10 /* objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = objc.m; sourceTree = "<group>"; };
 		OBJ_12 /* objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
 		OBJ_13 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = /Users/devedbox/Documents/Github/Aspector/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap; sourceTree = "<group>"; };
@@ -168,10 +172,12 @@
 			isa = PBXGroup;
 			children = (
 				DC5E857C2132EF5E003F8464 /* Class.swift */,
+				DC5E8586213434A1003F8464 /* Object.swift */,
 				DC5E857E2132F0C2003F8464 /* Ivar.swift */,
 				DC5E85802132F672003F8464 /* Property.swift */,
 				DC5E85842132FCB2003F8464 /* Property.Attribute.swift */,
 				DC5E85822132F7EF003F8464 /* Method.swift */,
+				DC5E858A21344070003F8464 /* Selector.swift */,
 			);
 			name = ObjCRuntime;
 			path = Sources/ObjCRuntime;
@@ -403,7 +409,9 @@
 				DC5E85812132F672003F8464 /* Property.swift in Sources */,
 				DC5E85852132FCB2003F8464 /* Property.Attribute.swift in Sources */,
 				DC5E857D2132EF5E003F8464 /* Class.swift in Sources */,
+				DC5E8587213434A1003F8464 /* Object.swift in Sources */,
 				DC5E857F2132F0C2003F8464 /* Ivar.swift in Sources */,
+				DC5E858B21344070003F8464 /* Selector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

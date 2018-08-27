@@ -8,11 +8,35 @@
 import ObjectiveC
 
 public struct Ivar {
-    private let _ivar: ObjectiveC.Ivar
+    internal let _ivar: ObjectiveC.Ivar
     
     internal init(
         _ivar: ObjectiveC.Ivar)
     {
         self._ivar = _ivar
+    }
+}
+
+extension Ivar {
+    public var name: String? {
+        return ivar_getName(_ivar).map {
+            String(
+                cString: $0
+            )
+        }
+    }
+    
+    public var typeEncoding: String? {
+        return ivar_getTypeEncoding(_ivar).map {
+            String(
+                cString: $0
+            )
+        }
+    }
+    
+    public var offset: Int {
+        return ivar_getOffset(
+            _ivar
+        )
     }
 }
