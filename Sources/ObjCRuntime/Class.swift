@@ -367,4 +367,98 @@ extension Class {
     }
 }
 
+// MARK: -
 
+extension Class {
+    public static var classes: [Class] {
+        var count: UInt32 = 0
+        let buffer = objc_copyClassList(
+            &count
+        )
+        
+        return (0..<count).compactMap { idx in
+            buffer.map {
+                Class(
+                    _class: $0[Int(idx)]
+                )
+            }
+        }
+    }
+    
+    public static func classes(limits: Int32) -> [Class] {
+        let buffer = UnsafeMutablePointer<AnyClass>.allocate(
+            capacity: Int(limits)
+        )
+        
+        let totalCount = objc_getClassList(
+            AutoreleasingUnsafeMutablePointer(buffer),
+            limits
+        )
+        
+        let classes = (0..<min(limits, totalCount)).map {
+            Class(
+                _class: buffer.advanced(
+                    by: Int($0)
+                ).pointee
+            )
+        }
+        
+        buffer.deallocate()
+        
+        return classes
+    }
+    
+    public static func lookUpClass(
+        of name: String) -> Class?
+    {
+        return objc_lookUpClass(
+            name.withCString {
+                $0
+            }
+        ).map {
+            Class(
+                _class: $0
+            )
+        }
+    }
+    
+    public static func `class`(
+        for name: String) -> Class?
+    {
+        return (objc_getClass(
+            name.withCString {
+                $0
+            }
+        ) as? AnyClass).map {
+            Class(
+                _class: $0
+            )
+        }
+    }
+    
+    public static func requiredClass(
+        for name: String) -> Class
+    {
+        return Class(
+            _class: objc_getRequiredClass(
+                name.withCString {
+                    $0
+                }
+            )
+        )
+    }
+    
+    public static func metaClass(
+        for name: String) -> Class?
+    {
+        return (objc_getMetaClass(
+            name.withCString {
+                $0
+            }
+        ) as? AnyClass).map {
+            Class(
+                _class: $0
+            )
+        }
+    }
+}

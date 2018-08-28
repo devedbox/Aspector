@@ -26,7 +26,7 @@ extension Ivar {
         }
     }
     
-    public var typeEncoding: String? {
+    public var types: String? {
         return ivar_getTypeEncoding(_ivar).map {
             String(
                 cString: $0
