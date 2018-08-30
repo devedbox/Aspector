@@ -28,6 +28,7 @@
 		DC5E85852132FCB2003F8464 /* Property.Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E85842132FCB2003F8464 /* Property.Attribute.swift */; };
 		DC5E8587213434A1003F8464 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8586213434A1003F8464 /* Object.swift */; };
 		DC5E858B21344070003F8464 /* Selector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E858A21344070003F8464 /* Selector.swift */; };
+		DC5E858D21356839003F8464 /* Aspect.Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E858C21356839003F8464 /* Aspect.Dispatch.swift */; };
 		OBJ_35 /* Aspect.Forward.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Aspect.Forward.swift */; };
 		OBJ_36 /* Aspect.NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Aspect.NSObject.swift */; };
 		OBJ_37 /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Aspect.swift */; };
@@ -99,6 +100,7 @@
 		DC5E85842132FCB2003F8464 /* Property.Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.Attribute.swift; sourceTree = "<group>"; };
 		DC5E8586213434A1003F8464 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		DC5E858A21344070003F8464 /* Selector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selector.swift; sourceTree = "<group>"; };
+		DC5E858C21356839003F8464 /* Aspect.Dispatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.Dispatch.swift; sourceTree = "<group>"; };
 		OBJ_10 /* objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = objc.m; sourceTree = "<group>"; };
 		OBJ_12 /* objc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
 		OBJ_13 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = /Users/devedbox/Documents/Github/Aspector/Aspector.xcodeproj/GeneratedModuleMap/_ObjC/module.modulemap; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				OBJ_15 /* Aspect.Forward.swift */,
 				OBJ_16 /* Aspect.NSObject.swift */,
+				DC5E858C21356839003F8464 /* Aspect.Dispatch.swift */,
 				OBJ_17 /* Aspect.swift */,
 			);
 			name = Aspector;
@@ -379,6 +382,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_35 /* Aspect.Forward.swift in Sources */,
+				DC5E858D21356839003F8464 /* Aspect.Dispatch.swift in Sources */,
 				OBJ_36 /* Aspect.NSObject.swift in Sources */,
 				OBJ_37 /* Aspect.swift in Sources */,
 			);
