@@ -23,6 +23,7 @@
 
 /* Begin PBXBuildFile section */
 		DC96AC082138F08700E908A8 /* MethodIMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96AC072138F08700E908A8 /* MethodIMPTests.swift */; };
+		DC96AC0A21393A1200E908A8 /* ClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC96AC0921393A1200E908A8 /* ClassTests.swift */; };
 		OBJ_102 /* ObjCRuntimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* ObjCRuntimeTests.swift */; };
 		OBJ_103 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* XCTestManifests.swift */; };
 		OBJ_105 /* ObjCRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Aspector::ObjCRuntime::Product" /* ObjCRuntime.framework */; };
@@ -115,6 +116,7 @@
 		"Aspector::ObjCRuntimeTests::Product" /* ObjCRuntimeTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = ObjCRuntimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Aspector::_ObjC::Product" /* _ObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = _ObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC96AC072138F08700E908A8 /* MethodIMPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodIMPTests.swift; sourceTree = "<group>"; };
+		DC96AC0921393A1200E908A8 /* ClassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Aspect.NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.NSObject.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Aspect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aspect.swift; sourceTree = "<group>"; };
 		OBJ_14 /* objc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = objc.m; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				OBJ_30 /* ObjCRuntimeTests.swift */,
 				DC96AC072138F08700E908A8 /* MethodIMPTests.swift */,
+				DC96AC0921393A1200E908A8 /* ClassTests.swift */,
 				OBJ_31 /* XCTestManifests.swift */,
 			);
 			name = ObjCRuntimeTests;
@@ -441,6 +444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				DC96AC0A21393A1200E908A8 /* ClassTests.swift in Sources */,
 				OBJ_102 /* ObjCRuntimeTests.swift in Sources */,
 				OBJ_103 /* XCTestManifests.swift in Sources */,
 				DC96AC082138F08700E908A8 /* MethodIMPTests.swift in Sources */,

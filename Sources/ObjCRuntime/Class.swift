@@ -7,8 +7,25 @@
 
 import ObjectiveC
 
-public struct Class {
-    private let _class: AnyClass
+public final class Class {
+    internal let _class: AnyClass
+    
+    internal init(
+        _class: AnyClass)
+    {
+        self._class = _class
+    }
+    
+    public convenience init?(
+        of obj: Any)
+    {
+        guard let cls = object_getClass(obj) else {
+            return nil
+        }
+        self.init(
+            _class: cls
+        )
+    }
 }
 
 extension Class {
@@ -35,7 +52,7 @@ extension Class {
         )
     }
     
-    public var superClass: Class? {
+    public var `super`: Class? {
         return class_getSuperclass(_class).map {
             Class(
                 _class: $0
@@ -43,7 +60,7 @@ extension Class {
         }
     }
     
-    public var isMetaClass: Bool {
+    public var isMeta: Bool {
         return class_isMetaClass(
             _class
         )
