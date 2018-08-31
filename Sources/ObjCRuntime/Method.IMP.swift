@@ -33,18 +33,22 @@ extension Method.IMP {
 
 extension Method.IMP {
     public convenience init?<T, R>(
-        func: @escaping (T) -> R)
+        func: @escaping (T) -> R) where T: AnyObject, R: AnyObject
     {
         typealias Funcc = @convention(block) (
             AnyObject)
             -> AnyObject
         
-        guard let funcc = `func` as? Funcc else {
-            return nil
+        let funcc: Funcc = {
+            `func`($0 as! T)
         }
+        
         self.init(
             _imp: imp_implementationWithBlock(
-                funcc
+                unsafeBitCast(
+                    funcc,
+                    to: AnyObject.self
+                )
             )
         )
     }
