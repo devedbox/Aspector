@@ -241,7 +241,7 @@ extension Class {
         return class_addMethod(
             _class,
             method.name._sel,
-            method.imp,
+            method.imp._imp,
             method.types
         )
     }
@@ -301,7 +301,7 @@ extension Class {
         return class_replaceMethod(
             _class,
             name._sel,
-            method.imp,
+            method.imp._imp,
             method.types
         )
     }
