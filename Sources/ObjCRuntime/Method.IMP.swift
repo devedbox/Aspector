@@ -35,8 +35,9 @@ extension Method.IMP {
     public convenience init?<T, R>(
         func: @escaping (T) -> R)
     {
-        typealias Funcc =
-            @convention(block) (AnyObject) -> AnyObject
+        typealias Funcc = @convention(block) (
+            AnyObject)
+            -> AnyObject
         
         guard let funcc = `func` as? Funcc else {
             return nil

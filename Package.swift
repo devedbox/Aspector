@@ -33,5 +33,8 @@ let package = Package(
         .testTarget(
             name: "AspectorTests",
             dependencies: ["Aspector"]),
+        .testTarget(
+            name: "ObjCRuntimeTests",
+            dependencies: ["ObjCRuntime"]),
     ]
 )
