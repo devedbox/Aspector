@@ -33,17 +33,21 @@ extension Method {
     }
     
     public var imp: IMP {
-        return method_getImplementation(
-            _method
+        return IMP(
+            _imp: method_getImplementation(
+                _method
+            )
         )
     }
     
     public func set(
         imp: IMP) -> IMP
     {
-        return method_setImplementation(
-            _method,
-            imp
+        return IMP(
+            _imp: method_setImplementation(
+                _method,
+                imp._imp
+            )
         )
     }
     
