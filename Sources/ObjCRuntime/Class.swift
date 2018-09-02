@@ -29,7 +29,7 @@ extension Class {
 extension Class {
     public var name: String {
         return String(
-            cString: class_getName(
+            class_getName(
                 _class
             )
         )
@@ -62,9 +62,7 @@ extension Class {
     {
         return class_getInstanceVariable(
             _class,
-            name.withCString {
-                $0
-            }
+            name.cString
         ).map {
             Ivar(_ivar: $0)
         }
@@ -75,9 +73,7 @@ extension Class {
     {
         return class_getClassVariable(
             _class,
-            name.withCString {
-                $0
-            }
+            name.cString
         ).map {
             Ivar(
                 _ivar: $0
@@ -93,9 +89,7 @@ extension Class {
     {
         return class_addIvar(
             _class,
-            name.withCString {
-                $0
-            },
+            name.cString,
             size,
             alignment,
             types
@@ -161,9 +155,7 @@ extension Class {
     {
         return class_getProperty(
             _class,
-            name.withCString {
-                $0
-            }
+            name.cString
         ).map {
             Property(
                 _objc_property_t: $0
@@ -199,9 +191,7 @@ extension Class {
     {
         return class_addProperty(
             _class,
-            name.withCString {
-                $0
-            },
+            name.cString,
             UnsafePointer<objc_property_attribute_t>(
                 attributes.map {
                     $0._attribute
@@ -219,9 +209,7 @@ extension Class {
     {
         class_replaceProperty(
             _class,
-            name.withCString {
-                $0
-            },
+            name.cString,
             UnsafePointer<objc_property_attribute_t>(
                 attributes.map {
                     $0._attribute
@@ -412,9 +400,7 @@ extension Class {
         of name: String) -> Class?
     {
         return objc_lookUpClass(
-            name.withCString {
-                $0
-            }
+            name.cString
         ).map {
             Class(
                 _class: $0
@@ -426,9 +412,7 @@ extension Class {
         for name: String) -> Class?
     {
         return (objc_getClass(
-            name.withCString {
-                $0
-            }
+            name.cString
         ) as? AnyClass).map {
             Class(
                 _class: $0
@@ -441,9 +425,7 @@ extension Class {
     {
         return Class(
             _class: objc_getRequiredClass(
-                name.withCString {
-                    $0
-                }
+                name.cString
             )
         )
     }
@@ -452,9 +434,7 @@ extension Class {
         for name: String) -> Class?
     {
         return (objc_getMetaClass(
-            name.withCString {
-                $0
-            }
+            name.cString
         ) as? AnyClass).map {
             Class(
                 _class: $0

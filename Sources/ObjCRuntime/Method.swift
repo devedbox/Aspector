@@ -67,7 +67,7 @@ extension Method {
 extension Method {
     public var returnType: String {
         return String(
-            cString: method_copyReturnType(
+            method_copyReturnType(
                 _method
             )
         )
@@ -92,7 +92,7 @@ extension Method {
             512
         )
         return String(
-            cString: buffer
+            buffer
         )
     }
 }
@@ -112,7 +112,7 @@ extension Method {
                 },
                 typeEncoding: $0.types.map {
                     String(
-                        cString: $0
+                        $0
                     )
                 }
             )

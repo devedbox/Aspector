@@ -21,7 +21,7 @@ extension Ivar {
     public var name: String? {
         return ivar_getName(_ivar).map {
             String(
-                cString: $0
+                $0
             )
         }
     }
@@ -29,7 +29,7 @@ extension Ivar {
     public var types: String? {
         return ivar_getTypeEncoding(_ivar).map {
             String(
-                cString: $0
+                $0
             )
         }
     }

@@ -14,7 +14,7 @@ public struct Selector {
 extension Selector {
     public var name: String {
         return String(
-            cString: sel_getName(
+            sel_getName(
                 _sel
             )
         )
@@ -25,9 +25,7 @@ extension Selector {
     {
         return Selector(
             _sel: sel_registerName(
-                name.withCString {
-                    $0
-                }
+                name.cString
             )
         )
     }
@@ -37,9 +35,7 @@ extension Selector {
     {
         return Selector(
             _sel: sel_getUid(
-                name.withCString {
-                    $0
-                }
+                name.cString
             )
         )
     }

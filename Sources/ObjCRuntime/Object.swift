@@ -33,7 +33,7 @@ extension Object {
 extension Object {
     public var className: String {
         return String(
-            cString: object_getClassName(
+            object_getClassName(
                 _obj
             )
         )

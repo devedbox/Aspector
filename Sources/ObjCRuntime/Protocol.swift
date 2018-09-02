@@ -16,7 +16,7 @@ public final class ObjCProtocol {
     }
     
     public convenience init?(name: String) {
-        guard let proto = objc_getProtocol(name.withCString { $0 }) else {
+        guard let proto = objc_getProtocol(name.cString) else {
             return nil
         }
         

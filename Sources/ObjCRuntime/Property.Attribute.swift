@@ -22,12 +22,8 @@ extension Property {
             value: String)
         {
             _attribute = objc_property_attribute_t(
-                name: name.withCString {
-                    $0
-                },
-                value: value.withCString {
-                    $0
-                }
+                name: name.cString,
+                value: value.cString
             )
         }
     }

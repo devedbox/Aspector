@@ -20,7 +20,7 @@ public struct Property {
 extension Property {
     public var name: String {
         return String(
-            cString: property_getName(
+            property_getName(
                 _property
             )
         )
@@ -31,7 +31,7 @@ extension Property {
             _property
         ).map {
             String(
-                cString: $0
+                $0
             )
         }
     }
@@ -39,12 +39,10 @@ extension Property {
     public func attributeValue(of name: String) -> String? {
         return property_copyAttributeValue(
             _property,
-            name.withCString {
-                $0
-            }
+            name.cString
         ).map {
             String(
-                cString: $0
+                $0
             )
         }
     }
